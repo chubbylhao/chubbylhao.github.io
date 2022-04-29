@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chubbylhao.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":220,"display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="理解霍夫线变换的基本思想！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hough线变换">
+<meta property="og:url" content="https://chubbylhao.github.io/2022/03/09/hough-xian-bian-huan/index.html">
+<meta property="og:site_name" content="lh&#39;s Blogs">
+<meta property="og:description" content="理解霍夫线变换的基本思想！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/exam1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/exam2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghCircle.png">
+<meta property="article:published_time" content="2022-03-09T08:03:55.000Z">
+<meta property="article:modified_time" content="2022-04-09T11:43:21.550Z">
+<meta property="article:author" content="ChubbyLH">
+<meta property="article:tag" content="图像处理">
+<meta property="article:tag" content="特征检测">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines1.png">
+
+<link rel="canonical" href="https://chubbylhao.github.io/2022/03/09/hough-xian-bian-huan/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hough线变换 | lh's Blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="lh's Blogs" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">lh's Blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+  <a href="https://github.com/chubbylhao" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://chubbylhao.github.io/2022/03/09/hough-xian-bian-huan/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ChubbyLH">
+      <meta itemprop="description" content="建立本博客网站的初衷便是希望它能够帮助我记录一点知识与技术~~希望自己可以一直进步~~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lh's Blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hough线变换
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-09 16:03:55" itemprop="dateCreated datePublished" datetime="2022-03-09T16:03:55+08:00">2022-03-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-09 19:43:21" itemprop="dateModified" datetime="2022-04-09T19:43:21+08:00">2022-04-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像处理</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/" itemprop="url" rel="index"><span itemprop="name">特征检测</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+            <div class="post-description">理解霍夫线变换的基本思想！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="一-hough-变换的参数平面-hough-平面">一、 $ Hough $
+变换的参数平面（ $ Hough $ 平面）</h4>
+<p>在图像平面（ $ Image Plan $ ）的坐标系 $ xOy $
+中，直线方程的<strong>斜截式</strong>为： $ y = px + q $ ，其中 $ p $
+为斜率， $ q $ 为截距</p>
+<p>假设上式所代表的<strong>某条</strong>（ $ p q $ 任意 ）直线上存在一点
+$ (x_{i},y_{i}) $ ，则此点满足 $ y_{i} = px_{i} + q $
+，若将其改写，可变为 <span class="math display">\[
+q = -x_{i}p + y_{i}
+\]</span> 试想，此时若构造一个 $ pOq $ 坐标系，则 $ -x_{i} $ 为斜率， $
+y_{i} $ 为截距，这是一条<strong>确定的直线</strong>！</p>
+<p>换言之， $ Hough $
+变换就是将图像平面的<strong>点</strong>映射为参数平面（ $
+Parametric Plan $ ） 的<strong>线</strong>！</p>
+<p>可以结合下图形象地理解：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines1.png" style="zoom: 67%;" /></p>
+<p>此时，可以在图像空间中考虑另一个点 $ (x_{j},y_{j}) $ ，它与点 $
+(x_{i},y_{i}) $ 共同确定一条直线 $ q_{0} = -p_{0}x + y $</p>
+<p>因为这两点具有<strong>同样的</strong> $ p $ （斜率）和 $ q $
+（截距），因此，二者在参数平面所代表的直线<strong>相交于同一点</strong>
+$ (p_{0}, q_{0}) $</p>
+<p>类似地，点 $ (x_{k},y_{k}) $ 所对应的直线也将经过点 $ (p_{0},q_{0}) $
+！</p>
+<p>由此得出一个直观的<strong>结论</strong>：</p>
+<blockquote>
+<p>图像平面中，同一条直线上的点在参数平面中所对应的线<strong>相交于一点</strong></p>
+<p>并且这一点的坐标为（图像平面直线的<strong>斜率</strong>，图像平面直线的<strong>截距</strong>）</p>
+</blockquote>
+<hr />
+<h4 id="二在-hough-平面中使用-voting-策略寻找直线">二、在 $ Hough $
+平面中使用 $ voting $ 策略寻找直线</h4>
+<p>在参数平面中，越多的直线相交于同一点 $ (p_{0},q_{0}) $
+，那么在图像平面中就有越多的点位于直线 $ y = p_{0}x + q_{0} $
+上，也就是说</p>
+<p><strong>这条直线越像直线</strong>，<strong>这条直线比较明显</strong>，<strong>这条直线比较长</strong>，<strong>这条直线应该被认为是直线并且应该被标识出来</strong></p>
+<p>那么，问题来了，怎么样才能知道这个点 $ (p_{0},q_{0}) $
+被<strong>几条</strong>参数平面中的直线经过呢？ $ (p_{0},q_{0}) $
+又应该取什么值呢？</p>
+<p>$ Hough $
+给出了一种<strong>遍历投票</strong>的解决办法，具体实现如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines2.png" style="zoom:67%;" /></p>
+<p>（1）在 $ pOq $
+坐标系中划分网格（网格的精度根据实际要求自行确定），坐标轴的范围应从实际的最小斜率变化到</p>
+<p>最大斜率、从实际的最小截距变化到最大截距（ $ p_{min} $ 到 $ p_{max} $
+， $ q_{min} $ 到 $ q_{max} $ ）</p>
+<p>（2）对于图像平面中的点 $ (x_{i},y_{i}) $ ，遍历 $ p $ （ $ q $
+也行）的所有<strong>网格取值</strong>，代入表达式 $ q = -x_{i}p + y_{i}$
+中可得到</p>
+<p>相应的 $ q $ （ $ p $
+）值，该值落在哪一个小网格内，就为该网格<strong>投一票</strong></p>
+<p>（3）遍历图像平面中所有的前景点，进行第（2）步操作，最终得到 $ pOq $
+坐标系中所有网格的投票情况</p>
+<p>（4）筛选投票数较多（大于设定阈值）的网格，该网格所代表的 $ p $ 和 $
+q$ 值便在图像平面中确定了直线 $ y_{i} = px_{i} + q $​</p>
+<hr />
+<h4 id="三方法的特点以及局限性">三、方法的特点以及局限性</h4>
+<h5 id="方法的特点">方法的特点：</h5>
+<blockquote>
+<p>如上右图所示，网格划分得越精细，容错率就越低，就越容易受噪声的影响，所找的直线数量就越多</p>
+<p>相反，网格划分得越粗糙，容错率就越高，在一定程度上能克服噪声的影响，但所找的直线越不准确</p>
+<p>因此，网格的划分精度往往取决于实际的需求，而且，挑选筛选直线的阈值也是一门技术活</p>
+</blockquote>
+<h5 id="方法的局限性">方法的局限性：</h5>
+<blockquote>
+<p>当图像平面中的直线接近<strong>竖直</strong>时， $ p $
+的值将变得特别大或特别小，即 $ |p| $ 趋于无穷时， $ pOq $
+平面将无法划分！</p>
+<p>即使硬着头皮划分，计算机也会因庞大的计算量而内存溢出！</p>
+<p>因此，传统意义上的 $ Hough $
+线变换<strong>无法寻找竖直直线</strong>！</p>
+</blockquote>
+<hr />
+<h4 id="四解决传统的-hough-线变换无法寻找竖直直线的问题">四、解决传统的
+$ Hough $ 线变换无法寻找竖直直线的问题</h4>
+<p>使用极坐标方程代替直角坐标方程即可完美地解决这个问题！首先观察下图 $
+a) $ ：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines3.png" style="zoom:67%;" /></p>
+<p>在图像平面中，过原点做一条与直线<strong>垂直</strong>的垂线，该垂线的所代表的<strong>方向向量</strong>可写为：
+<span class="math display">\[
+(\ \rho cos(\theta),\ \rho sin(\theta)\ )
+\]</span> 设直线的方向向量为 $ (m,n) $ ，且经过点 $ (x_{i},y_{i}) $
+，则其方程可写为： <span class="math display">\[
+\frac{x-x_{i}}{m} = \frac{y-y_{i}}{n}
+\]</span> 又因直线与垂线垂直，因此二者的方向向量满足： <span
+class="math display">\[
+(\ \rho cos(\theta),\ \rho sin(\theta)\ ) (m,\ n) =
+m\rho cos(\theta) + n\rho sin(\theta) = 0
+\]</span> 即： <span class="math display">\[
+m\rho cos(\theta) = -n\rho sin(\theta) \\ \\
+\frac{m}{n} = -\frac{\rho sin(\theta)}{\rho cos(\theta)}
+\]</span> 故有： <span class="math display">\[
+\frac{x-x_{i}}{y-y_{i}} = \frac{m}{n} = -\frac{\rho sin(\theta)}{\rho
+cos(\theta)}
+\]</span> 令： <span class="math display">\[
+x_{i} = \rho cos(\theta) \;\;\;\; y_{i} = \rho sin(\theta)
+\]</span> 代入，并化简整理，可得： <span class="math display">\[
+\frac{x-\rho cos(\theta)}{y-\rho sin(\theta)} = -\frac{\rho
+sin(\theta)}{\rho cos(\theta)} \\ \\
+\rho cos(\theta)x - \rho^2cos^2(\theta) = \rho^2sin^2(\theta) - \rho
+sin(\theta)y \\ \\
+\rho cos(\theta)x + \rho sin(\theta)y = \rho^2cos^2(\theta)
++  \rho^2sin^2(\theta) = \rho^2 \\ \\
+\rho = xcos(\theta) + ysin(\theta)
+\]</span>
+可以很明显地看出，在参数平面上，一个<strong>点</strong>映射成了一条<strong>正余弦曲线</strong>，并且横纵坐标轴的取值范围缩减为：
+<span class="math display">\[
+\rho \in [-D,D] \;\;\;\;\;\; \theta \in [-90^o,90^o]
+\]</span> 其中 $ D $ 为图像平面中对角之间的最大距离</p>
+<blockquote>
+<p>寻找直线的<strong>遍历投票</strong>思想在这里是一样的，只不过参数平面交点的获得由<strong>直线相交</strong>变为了<strong>正余弦曲线相交</strong></p>
+</blockquote>
+<hr />
+<h4 id="五一些-hough-线变换的实例建立直观感受">五、一些 $ Hough $
+线变换的实例（建立直观感受）</h4>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines4.png" style="zoom:67%;" /></p>
+<h4 id="六-hough-线变换的实现">六、 $ Hough $ 线变换的实现</h4>
+<p>函数 <code>myHoughLine</code> 实现了 $ Hough $ 线变换，代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myHoughLine</span><span class="params">(I,lineNum)</span></span></span><br><span class="line"><span class="comment">%% 参数说明</span></span><br><span class="line"><span class="comment">% I为灰度图像</span></span><br><span class="line"><span class="comment">% lineNum为要提取的直线数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Hough线变换</span></span><br><span class="line">BW = edge(I,<span class="string">&#x27;canny&#x27;</span>);    <span class="comment">% 提取边缘，以作为Hough线变换的前景</span></span><br><span class="line">[row,col] = <span class="built_in">size</span>(BW);</span><br><span class="line">D = <span class="built_in">ceil</span>(<span class="built_in">sqrt</span>(row^<span class="number">2</span> + col^<span class="number">2</span>));    <span class="comment">% 图像平面的对角距离，为避免索引时超出数组边界，向上取整</span></span><br><span class="line">Rho = -D:D; Theta = <span class="number">-90</span>:<span class="number">90</span>;    <span class="comment">% 定义参数平面的取值范围</span></span><br><span class="line">Scores = <span class="built_in">zeros</span>(<span class="built_in">length</span>(Rho),<span class="built_in">length</span>(Theta));    <span class="comment">% 创建voting矩阵</span></span><br><span class="line">[x,y] = <span class="built_in">find</span>(BW == <span class="number">1</span>);    <span class="comment">% 取出前景像素作为voting点</span></span><br><span class="line">rho = <span class="built_in">round</span>(x.*<span class="built_in">cosd</span>(Theta) + y.*<span class="built_in">sind</span>(Theta));</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="built_in">size</span>(rho,<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:<span class="built_in">length</span>(Theta)</span><br><span class="line">        Scores(D + rho(<span class="built_in">i</span>,<span class="built_in">j</span>) + <span class="number">1</span>,<span class="built_in">j</span>) = Scores(D + rho(<span class="built_in">i</span>,<span class="built_in">j</span>) + <span class="number">1</span>,<span class="built_in">j</span>) + <span class="number">1</span>;    <span class="comment">% 遍历投票</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">lineMaxValue = maxk(Scores(:),lineNum);</span><br><span class="line">[lineRho,lineTheta] = <span class="built_in">find</span>(Scores &gt;= lineMaxValue(lineNum),lineNum);</span><br><span class="line">lineRho = lineRho - D - <span class="number">1</span>;    <span class="comment">% 记得转换回来</span></span><br><span class="line">lineTheta = lineTheta - <span class="number">90</span> - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 绘制“最强的”lineNum条直线</span></span><br><span class="line"><span class="built_in">figure</span>; imshow(I); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> k = <span class="number">1</span>:lineNum</span><br><span class="line">   n = <span class="number">0.05</span>*row:<span class="number">0.95</span>*row;</span><br><span class="line">   m = (-<span class="built_in">cosd</span>(lineTheta(k))*n + lineRho(k)) / <span class="built_in">sind</span>(lineTheta(k));</span><br><span class="line">   m(m &lt; <span class="number">0.05</span>*col | m &gt; <span class="number">0.95</span>*col) = NaN;    <span class="comment">% 绘制范围不要超过图像边界</span></span><br><span class="line">   <span class="built_in">plot</span>(m,n,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;Linewidth&#x27;</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>测试代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">close all;clear;clc;tic;</span><br><span class="line">I = imread(<span class="string">&#x27;airport.tif&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">size</span>(I,<span class="number">3</span>) == <span class="number">3</span></span><br><span class="line">    I = rgb2gray(I);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">myHoughLine(I,<span class="number">3</span>);toc;</span><br></pre></td></tr></table></figure>
+<p>对一张机场航拍图进行主干道提取：</p>
+<p><strong>这是原图（可以看出一共有3条主干道）</strong></p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/exam1.png" style="zoom: 67%;" /></p>
+<p><strong>这是使用 $ Hough $ 线变换的提取结果图</strong></p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/exam2.png" style="zoom:67%;" /></p>
+<h4 id="七附录-hough-圆变换">七、附录： $ Hough $ 圆变换</h4>
+<p>$ Hough $
+圆变换的思想与线变换是一致的，区别仅在于参数空间的维数不同。（ $ Hough $
+圆变换的参数空间为 $ a,b,r $ 三维）</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghCircle.png" style="zoom:67%;" /></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ChubbyLH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://chubbylhao.github.io/2022/03/09/hough-xian-bian-huan/" title="Hough线变换">https://chubbylhao.github.io/2022/03/09/hough-xian-bian-huan/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 图像处理</a>
+              <a href="/tags/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/" rel="tag"><i class="fa fa-tag"></i> 特征检测</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/07/tu-xiang-de-kong-jian-bian-huan/" rel="prev" title="图像的空间变换">
+      <i class="fa fa-chevron-left"></i> 图像的空间变换
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/11/ji-yu-xiang-wei-xiang-guan-de-tu-xiang-pei-zhun-ji-zhu/" rel="next" title="基于相位相关的图像配准技术">
+      基于相位相关的图像配准技术 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80-hough-%E5%8F%98%E6%8D%A2%E7%9A%84%E5%8F%82%E6%95%B0%E5%B9%B3%E9%9D%A2-hough-%E5%B9%B3%E9%9D%A2"><span class="nav-text">一、 $ Hough $
+变换的参数平面（ $ Hough $ 平面）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E5%9C%A8-hough-%E5%B9%B3%E9%9D%A2%E4%B8%AD%E4%BD%BF%E7%94%A8-voting-%E7%AD%96%E7%95%A5%E5%AF%BB%E6%89%BE%E7%9B%B4%E7%BA%BF"><span class="nav-text">二、在 $ Hough $
+平面中使用 $ voting $ 策略寻找直线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E6%96%B9%E6%B3%95%E7%9A%84%E7%89%B9%E7%82%B9%E4%BB%A5%E5%8F%8A%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-text">三、方法的特点以及局限性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">方法的特点：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-text">方法的局限性：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E8%A7%A3%E5%86%B3%E4%BC%A0%E7%BB%9F%E7%9A%84-hough-%E7%BA%BF%E5%8F%98%E6%8D%A2%E6%97%A0%E6%B3%95%E5%AF%BB%E6%89%BE%E7%AB%96%E7%9B%B4%E7%9B%B4%E7%BA%BF%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">四、解决传统的
+$ Hough $ 线变换无法寻找竖直直线的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%94%E4%B8%80%E4%BA%9B-hough-%E7%BA%BF%E5%8F%98%E6%8D%A2%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%BB%BA%E7%AB%8B%E7%9B%B4%E8%A7%82%E6%84%9F%E5%8F%97"><span class="nav-text">五、一些 $ Hough $
+线变换的实例（建立直观感受）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AD-hough-%E7%BA%BF%E5%8F%98%E6%8D%A2%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-text">六、 $ Hough $ 线变换的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%83%E9%99%84%E5%BD%95-hough-%E5%9C%86%E5%8F%98%E6%8D%A2"><span class="nav-text">七、附录： $ Hough $ 圆变换</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ChubbyLH"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">ChubbyLH</p>
+  <div class="site-description" itemprop="description">建立本博客网站的初衷便是希望它能够帮助我记录一点知识与技术~~希望自己可以一直进步~~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/chubbylhao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;chubbylhao" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      其它站点链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tjxj.github.io/" title="https:&#x2F;&#x2F;tjxj.github.io&#x2F;" rel="noopener" target="_blank">R2ML</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/Mikoto10032/DeepLearning" title="https:&#x2F;&#x2F;github.com&#x2F;Mikoto10032&#x2F;DeepLearning" rel="noopener" target="_blank">R2DL</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://ussofol.github.io/" title="https:&#x2F;&#x2F;ussofol.github.io&#x2F;" rel="noopener" target="_blank">DLX</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChubbyLH</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">37k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:13</span>
+</div>
+
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+		year - 作为date对象的年份，为4位年份值
+		month - 0-11之间的整数，做为date对象的月份
+		day - 1-31之间的整数，做为date对象的天数
+		hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+		minutes - 0-59之间的整数，做为date对象的分钟数
+		seconds - 0-59之间的整数，做为date对象的秒数
+		microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+		var t1 = Date.UTC(2022,03,06,14,47,00); //北京时间2018-2-13 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 本站已经正常运行 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+-->
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span><br></span>   
+​
+	访问量<span id="busuanzi_value_site_pv"></span>次
+	访客数<span id="busuanzi_value_site_uv"></span>人
+	阅读量<span id="busuanzi_value_page_pv"></span>次<script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
+    window.MathJax = {
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":220,"height":360},"mobile":{"show":false},"react":{"opacity":0.8}});</script></body>
+</html>

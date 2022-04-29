@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>lh&#39;s Blogs</title>
+  <icon>https://chubbylhao.github.io/icon.png</icon>
+  
+  <link href="https://chubbylhao.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://chubbylhao.github.io/"/>
+  <updated>2022-04-18T14:25:16.969Z</updated>
+  <id>https://chubbylhao.github.io/</id>
+  
+  <author>
+    <name>ChubbyLH</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Haar特征</title>
+    <link href="https://chubbylhao.github.io/2022/04/18/haar-te-zheng/"/>
+    <id>https://chubbylhao.github.io/2022/04/18/haar-te-zheng/</id>
+    <published>2022-04-18T14:21:56.000Z</published>
+    <updated>2022-04-18T14:25:16.969Z</updated>
+    
+    
+    <summary type="html">在人脸检测中，Haar特征应该是使用得最多的特征！</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/tags/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LBP特征</title>
+    <link href="https://chubbylhao.github.io/2022/04/17/lbp-te-zheng/"/>
+    <id>https://chubbylhao.github.io/2022/04/17/lbp-te-zheng/</id>
+    <published>2022-04-17T09:40:37.000Z</published>
+    <updated>2022-04-17T09:48:41.263Z</updated>
+    
+    
+    <summary type="html">LBP是一种针对图像纹理的强大描述子！</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/tags/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HOG特征</title>
+    <link href="https://chubbylhao.github.io/2022/04/16/hog-te-zheng/"/>
+    <id>https://chubbylhao.github.io/2022/04/16/hog-te-zheng/</id>
+    <published>2022-04-16T13:12:48.000Z</published>
+    <updated>2022-04-16T14:36:01.978Z</updated>
+    
+    
+    <summary type="html">梯度方向直方图（Histogram of Oriented Gradient，HOG）特征结合SVM分类器在行人检测中获得了极大的成功。注意一点，HOG特征是描述纹理的特征！</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/tags/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Harris矩阵和Hessian矩阵</title>
+    <link href="https://chubbylhao.github.io/2022/04/15/harris-ju-zhen-he-hessian-ju-zhen/"/>
+    <id>https://chubbylhao.github.io/2022/04/15/harris-ju-zhen-he-hessian-ju-zhen/</id>
+    <published>2022-04-15T07:34:52.000Z</published>
+    <updated>2022-04-15T13:30:27.904Z</updated>
+    
+    
+    <summary type="html">要搞清楚，Harris矩阵（使用的是一阶导数）和Hessian矩阵（使用的是二阶导数）不是同一个东西！</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/tags/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于图像中的导数问题</title>
+    <link href="https://chubbylhao.github.io/2022/04/14/guan-yu-tu-xiang-zhong-de-dao-shu-wen-ti/"/>
+    <id>https://chubbylhao.github.io/2022/04/14/guan-yu-tu-xiang-zhong-de-dao-shu-wen-ti/</id>
+    <published>2022-04-14T08:20:57.000Z</published>
+    <updated>2022-04-15T13:33:17.422Z</updated>
+    
+    
+    <summary type="html">记录个人对于图像中导数的思考。</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/tags/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DIP中的Hessian矩阵</title>
+    <link href="https://chubbylhao.github.io/2022/04/13/dip-zhong-de-hessian-ju-zhen/"/>
+    <id>https://chubbylhao.github.io/2022/04/13/dip-zhong-de-hessian-ju-zhen/</id>
+    <published>2022-04-13T09:10:21.000Z</published>
+    <updated>2022-04-15T13:25:12.274Z</updated>
+    
+    
+    <summary type="html">Hessian矩阵可以量化图像中的“平坦区域”、“边缘”和“角”之间的差异，它体现了梯度的局部变化率（即梯度变化的快慢，又称局部曲率、局部曲折度）。</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/tags/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python杂碎知识点</title>
+    <link href="https://chubbylhao.github.io/2022/04/13/python-za-sui-zhi-shi-dian/"/>
+    <id>https://chubbylhao.github.io/2022/04/13/python-za-sui-zhi-shi-dian/</id>
+    <published>2022-04-13T03:13:48.000Z</published>
+    <updated>2022-04-13T03:16:58.942Z</updated>
+    
+    
+    <summary type="html">记录Python中的一点杂碎知识点，以备忘。</summary>
+    
+    
+    
+    <category term="Python" scheme="https://chubbylhao.github.io/categories/Python/"/>
+    
+    
+    <category term="Python" scheme="https://chubbylhao.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python中的生成器和迭代器</title>
+    <link href="https://chubbylhao.github.io/2022/04/12/python-zhong-de-sheng-cheng-qi-he-die-dai-qi/"/>
+    <id>https://chubbylhao.github.io/2022/04/12/python-zhong-de-sheng-cheng-qi-he-die-dai-qi/</id>
+    <published>2022-04-12T07:43:30.000Z</published>
+    <updated>2022-04-12T07:49:44.348Z</updated>
+    
+    
+    <summary type="html">生成器和迭代器都可以调用next()方法，但要注意迭代器和可迭代类型的区别！</summary>
+    
+    
+    
+    <category term="Python" scheme="https://chubbylhao.github.io/categories/Python/"/>
+    
+    
+    <category term="Python" scheme="https://chubbylhao.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python中的生成式（推导式）</title>
+    <link href="https://chubbylhao.github.io/2022/04/12/python-zhong-de-sheng-cheng-shi-tui-dao-shi/"/>
+    <id>https://chubbylhao.github.io/2022/04/12/python-zhong-de-sheng-cheng-shi-tui-dao-shi/</id>
+    <published>2022-04-12T01:49:19.000Z</published>
+    <updated>2022-04-12T02:35:24.019Z</updated>
+    
+    
+    <summary type="html">生成式（推导式）是Python中一种比较独特的语法，可以帮助我们写出精简的代码，但是完全不使用它对于实现功能而言也基本没有影响。（记住，这只是一种使我们的代码看起来更精简、更优雅的工具，但并不是必需品，想偷懒的大可略过）</summary>
+    
+    
+    
+    <category term="Python" scheme="https://chubbylhao.github.io/categories/Python/"/>
+    
+    
+    <category term="Python" scheme="https://chubbylhao.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python中的装饰器</title>
+    <link href="https://chubbylhao.github.io/2022/04/11/python-zhong-de-zhuang-shi-qi/"/>
+    <id>https://chubbylhao.github.io/2022/04/11/python-zhong-de-zhuang-shi-qi/</id>
+    <published>2022-04-11T13:55:23.000Z</published>
+    <updated>2022-04-11T14:26:09.766Z</updated>
+    
+    
+    <summary type="html">写一个Python装饰器的例子，便于以后在忘记时能有个参照，另外，它也可以作为一个模板，修改之后便可以应用于手头任务。</summary>
+    
+    
+    
+    <category term="Python" scheme="https://chubbylhao.github.io/categories/Python/"/>
+    
+    
+    <category term="Python" scheme="https://chubbylhao.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python中的函数参数类型</title>
+    <link href="https://chubbylhao.github.io/2022/04/11/python-zhong-de-han-shu-can-shu-lei-xing/"/>
+    <id>https://chubbylhao.github.io/2022/04/11/python-zhong-de-han-shu-can-shu-lei-xing/</id>
+    <published>2022-04-11T03:34:37.000Z</published>
+    <updated>2022-04-11T03:41:39.125Z</updated>
+    
+    
+    <summary type="html">记录Python中函数的参数类型：位置参数（顺序参数）、默认参数以及动态参数！</summary>
+    
+    
+    
+    <category term="Python" scheme="https://chubbylhao.github.io/categories/Python/"/>
+    
+    
+    <category term="Python" scheme="https://chubbylhao.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解读Python包结构时的一些记录</title>
+    <link href="https://chubbylhao.github.io/2022/04/10/jie-du-python-bao-jie-gou-shi-de-yi-xie-ji-lu/"/>
+    <id>https://chubbylhao.github.io/2022/04/10/jie-du-python-bao-jie-gou-shi-de-yi-xie-ji-lu/</id>
+    <published>2022-04-10T09:08:19.000Z</published>
+    <updated>2022-04-11T14:31:07.116Z</updated>
+    
+    
+    <summary type="html">读优秀开源库的源码真是一件痛苦的事情（至少对于本小白来说）！只能先从解读包的基本结构开始（不过先别急，路要一步一步走，饭要一口一口吃）！</summary>
+    
+    
+    
+    <category term="Python" scheme="https://chubbylhao.github.io/categories/Python/"/>
+    
+    
+    <category term="Python" scheme="https://chubbylhao.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图像聚类分割中经典的k-means和fuzzy c-means算法</title>
+    <link href="https://chubbylhao.github.io/2022/04/01/tu-xiang-ju-lei-fen-ge-zhong-jing-dian-de-k-means-he-fuzzy-c-means-suan-fa/"/>
+    <id>https://chubbylhao.github.io/2022/04/01/tu-xiang-ju-lei-fen-ge-zhong-jing-dian-de-k-means-he-fuzzy-c-means-suan-fa/</id>
+    <published>2022-04-01T08:16:35.000Z</published>
+    <updated>2022-04-15T14:02:29.501Z</updated>
+    
+    
+    <summary type="html">在使用聚类的图像分割算法中，k-means和fuzzy c-means无疑是最经典的两种！（只是粗糙记录一下，详细内容参看自己整理的相关论文和实现的相关代码，因为东西实在太多，写一篇详细的blog太过费时了~~）</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="图像分割" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="图像分割" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图像融合概述</title>
+    <link href="https://chubbylhao.github.io/2022/03/25/tu-xiang-rong-he-gai-shu/"/>
+    <id>https://chubbylhao.github.io/2022/03/25/tu-xiang-rong-he-gai-shu/</id>
+    <published>2022-03-25T08:31:47.000Z</published>
+    <updated>2022-04-15T14:03:50.106Z</updated>
+    
+    
+    <summary type="html">对图像融合做一个简单初步的了解。有需求或者有时间有精力的时候再回头做拓展。</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="图像融合" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="图像融合" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图像中检测直线的方法</title>
+    <link href="https://chubbylhao.github.io/2022/03/15/tu-xiang-zhong-jian-ce-zhi-xian-de-fang-fa/"/>
+    <id>https://chubbylhao.github.io/2022/03/15/tu-xiang-zhong-jian-ce-zhi-xian-de-fang-fa/</id>
+    <published>2022-03-15T03:36:30.000Z</published>
+    <updated>2022-04-09T11:43:21.550Z</updated>
+    
+    
+    <summary type="html">一个简单记录：如何检测图像中的直线？</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/tags/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于相位相关的图像配准技术</title>
+    <link href="https://chubbylhao.github.io/2022/03/11/ji-yu-xiang-wei-xiang-guan-de-tu-xiang-pei-zhun-ji-zhu/"/>
+    <id>https://chubbylhao.github.io/2022/03/11/ji-yu-xiang-wei-xiang-guan-de-tu-xiang-pei-zhun-ji-zhu/</id>
+    <published>2022-03-11T03:33:53.000Z</published>
+    <updated>2022-04-09T11:43:21.551Z</updated>
+    
+    
+    <summary type="html">相位相关法是变换域的方法，它基于傅里叶变换来配准两幅图像之间的平移失配。该方法对噪声具有较好的鲁棒性，并且容易在硬件上实现。</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="图像配准" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E9%85%8D%E5%87%86/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="图像配准" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E9%85%8D%E5%87%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hough线变换</title>
+    <link href="https://chubbylhao.github.io/2022/03/09/hough-xian-bian-huan/"/>
+    <id>https://chubbylhao.github.io/2022/03/09/hough-xian-bian-huan/</id>
+    <published>2022-03-09T08:03:55.000Z</published>
+    <updated>2022-04-09T11:43:21.550Z</updated>
+    
+    
+    <summary type="html">理解霍夫线变换的基本思想！</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="特征检测" scheme="https://chubbylhao.github.io/tags/%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图像的空间变换</title>
+    <link href="https://chubbylhao.github.io/2022/03/07/tu-xiang-de-kong-jian-bian-huan/"/>
+    <id>https://chubbylhao.github.io/2022/03/07/tu-xiang-de-kong-jian-bian-huan/</id>
+    <published>2022-03-07T01:22:02.000Z</published>
+    <updated>2022-04-09T11:43:21.551Z</updated>
+    
+    
+    <summary type="html">图像的配准过程就是将两幅图像中表达相同结构的点进行空间上的对齐，在这个对齐的过程中不可避免地要进行图像的空间变换。</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="图像配准" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E9%85%8D%E5%87%86/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="图像配准" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E9%85%8D%E5%87%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用Hexo和GitHub_Pages搭建个人博客</title>
+    <link href="https://chubbylhao.github.io/2022/03/05/shi-yong-hexo-he-github-pages-da-jian-ge-ren-bo-ke/"/>
+    <id>https://chubbylhao.github.io/2022/03/05/shi-yong-hexo-he-github-pages-da-jian-ge-ren-bo-ke/</id>
+    <published>2022-03-05T05:28:58.000Z</published>
+    <updated>2022-04-09T11:43:21.550Z</updated>
+    
+    
+    <summary type="html">通过使用Hexo和GitHub Pages能够快速搭建一个属于你自己的博客网站！</summary>
+    
+    
+    
+    <category term="环境搭建" scheme="https://chubbylhao.github.io/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    
+    <category term="Hexo" scheme="https://chubbylhao.github.io/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/Hexo/"/>
+    
+    
+    <category term="环境搭建" scheme="https://chubbylhao.github.io/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    
+    <category term="Hexo" scheme="https://chubbylhao.github.io/tags/Hexo/"/>
+    
+  </entry>
+  
+</feed>
