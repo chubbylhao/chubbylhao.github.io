@@ -346,149 +346,6 @@ href="https://www.cnblogs.com/alexme/p/11361563.html">只能说这个是十分�
       </tags>
   </entry>
   <entry>
-    <title>Hough线变换</title>
-    <url>/2022/03/09/hough-xian-bian-huan/</url>
-    <content><![CDATA[<h4 id="一-hough-变换的参数平面-hough-平面">一、 $ Hough $
-变换的参数平面（ $ Hough $ 平面）</h4>
-<p>在图像平面（ $ Image Plan $ ）的坐标系 $ xOy $
-中，直线方程的<strong>斜截式</strong>为： $ y = px + q $ ，其中 $ p $
-为斜率， $ q $ 为截距</p>
-<p>假设上式所代表的<strong>某条</strong>（ $ p q $ 任意 ）直线上存在一点
-$ (x_{i},y_{i}) $ ，则此点满足 $ y_{i} = px_{i} + q $
-，若将其改写，可变为 <span class="math display">\[
-q = -x_{i}p + y_{i}
-\]</span> 试想，此时若构造一个 $ pOq $ 坐标系，则 $ -x_{i} $ 为斜率， $
-y_{i} $ 为截距，这是一条<strong>确定的直线</strong>！</p>
-<p>换言之， $ Hough $
-变换就是将图像平面的<strong>点</strong>映射为参数平面（ $
-Parametric Plan $ ） 的<strong>线</strong>！</p>
-<p>可以结合下图形象地理解：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines1.png" style="zoom: 67%;" /></p>
-<p>此时，可以在图像空间中考虑另一个点 $ (x_{j},y_{j}) $ ，它与点 $
-(x_{i},y_{i}) $ 共同确定一条直线 $ q_{0} = -p_{0}x + y $</p>
-<p>因为这两点具有<strong>同样的</strong> $ p $ （斜率）和 $ q $
-（截距），因此，二者在参数平面所代表的直线<strong>相交于同一点</strong>
-$ (p_{0}, q_{0}) $</p>
-<p>类似地，点 $ (x_{k},y_{k}) $ 所对应的直线也将经过点 $ (p_{0},q_{0}) $
-！</p>
-<p>由此得出一个直观的<strong>结论</strong>：</p>
-<blockquote>
-<p>图像平面中，同一条直线上的点在参数平面中所对应的线<strong>相交于一点</strong></p>
-<p>并且这一点的坐标为（图像平面直线的<strong>斜率</strong>，图像平面直线的<strong>截距</strong>）</p>
-</blockquote>
-<hr />
-<h4 id="二在-hough-平面中使用-voting-策略寻找直线">二、在 $ Hough $
-平面中使用 $ voting $ 策略寻找直线</h4>
-<p>在参数平面中，越多的直线相交于同一点 $ (p_{0},q_{0}) $
-，那么在图像平面中就有越多的点位于直线 $ y = p_{0}x + q_{0} $
-上，也就是说</p>
-<p><strong>这条直线越像直线</strong>，<strong>这条直线比较明显</strong>，<strong>这条直线比较长</strong>，<strong>这条直线应该被认为是直线并且应该被标识出来</strong></p>
-<p>那么，问题来了，怎么样才能知道这个点 $ (p_{0},q_{0}) $
-被<strong>几条</strong>参数平面中的直线经过呢？ $ (p_{0},q_{0}) $
-又应该取什么值呢？</p>
-<p>$ Hough $
-给出了一种<strong>遍历投票</strong>的解决办法，具体实现如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines2.png" style="zoom:67%;" /></p>
-<p>（1）在 $ pOq $
-坐标系中划分网格（网格的精度根据实际要求自行确定），坐标轴的范围应从实际的最小斜率变化到</p>
-<p>最大斜率、从实际的最小截距变化到最大截距（ $ p_{min} $ 到 $ p_{max} $
-， $ q_{min} $ 到 $ q_{max} $ ）</p>
-<p>（2）对于图像平面中的点 $ (x_{i},y_{i}) $ ，遍历 $ p $ （ $ q $
-也行）的所有<strong>网格取值</strong>，代入表达式 $ q = -x_{i}p + y_{i}$
-中可得到</p>
-<p>相应的 $ q $ （ $ p $
-）值，该值落在哪一个小网格内，就为该网格<strong>投一票</strong></p>
-<p>（3）遍历图像平面中所有的前景点，进行第（2）步操作，最终得到 $ pOq $
-坐标系中所有网格的投票情况</p>
-<p>（4）筛选投票数较多（大于设定阈值）的网格，该网格所代表的 $ p $ 和 $
-q$ 值便在图像平面中确定了直线 $ y_{i} = px_{i} + q $​</p>
-<hr />
-<h4 id="三方法的特点以及局限性">三、方法的特点以及局限性</h4>
-<h5 id="方法的特点">方法的特点：</h5>
-<blockquote>
-<p>如上右图所示，网格划分得越精细，容错率就越低，就越容易受噪声的影响，所找的直线数量就越多</p>
-<p>相反，网格划分得越粗糙，容错率就越高，在一定程度上能克服噪声的影响，但所找的直线越不准确</p>
-<p>因此，网格的划分精度往往取决于实际的需求，而且，挑选筛选直线的阈值也是一门技术活</p>
-</blockquote>
-<h5 id="方法的局限性">方法的局限性：</h5>
-<blockquote>
-<p>当图像平面中的直线接近<strong>竖直</strong>时， $ p $
-的值将变得特别大或特别小，即 $ |p| $ 趋于无穷时， $ pOq $
-平面将无法划分！</p>
-<p>即使硬着头皮划分，计算机也会因庞大的计算量而内存溢出！</p>
-<p>因此，传统意义上的 $ Hough $
-线变换<strong>无法寻找竖直直线</strong>！</p>
-</blockquote>
-<hr />
-<h4 id="四解决传统的-hough-线变换无法寻找竖直直线的问题">四、解决传统的
-$ Hough $ 线变换无法寻找竖直直线的问题</h4>
-<p>使用极坐标方程代替直角坐标方程即可完美地解决这个问题！首先观察下图 $
-a) $ ：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines3.png" style="zoom:67%;" /></p>
-<p>在图像平面中，过原点做一条与直线<strong>垂直</strong>的垂线，该垂线的所代表的<strong>方向向量</strong>可写为：
-<span class="math display">\[
-(\ \rho cos(\theta),\ \rho sin(\theta)\ )
-\]</span> 设直线的方向向量为 $ (m,n) $ ，且经过点 $ (x_{i},y_{i}) $
-，则其方程可写为： <span class="math display">\[
-\frac{x-x_{i}}{m} = \frac{y-y_{i}}{n}
-\]</span> 又因直线与垂线垂直，因此二者的方向向量满足： <span
-class="math display">\[
-(\ \rho cos(\theta),\ \rho sin(\theta)\ ) (m,\ n) =
-m\rho cos(\theta) + n\rho sin(\theta) = 0
-\]</span> 即： <span class="math display">\[
-m\rho cos(\theta) = -n\rho sin(\theta) \\ \\
-\frac{m}{n} = -\frac{\rho sin(\theta)}{\rho cos(\theta)}
-\]</span> 故有： <span class="math display">\[
-\frac{x-x_{i}}{y-y_{i}} = \frac{m}{n} = -\frac{\rho sin(\theta)}{\rho
-cos(\theta)}
-\]</span> 令： <span class="math display">\[
-x_{i} = \rho cos(\theta) \;\;\;\; y_{i} = \rho sin(\theta)
-\]</span> 代入，并化简整理，可得： <span class="math display">\[
-\frac{x-\rho cos(\theta)}{y-\rho sin(\theta)} = -\frac{\rho
-sin(\theta)}{\rho cos(\theta)} \\ \\
-\rho cos(\theta)x - \rho^2cos^2(\theta) = \rho^2sin^2(\theta) - \rho
-sin(\theta)y \\ \\
-\rho cos(\theta)x + \rho sin(\theta)y = \rho^2cos^2(\theta)
-+  \rho^2sin^2(\theta) = \rho^2 \\ \\
-\rho = xcos(\theta) + ysin(\theta)
-\]</span>
-可以很明显地看出，在参数平面上，一个<strong>点</strong>映射成了一条<strong>正余弦曲线</strong>，并且横纵坐标轴的取值范围缩减为：
-<span class="math display">\[
-\rho \in [-D,D] \;\;\;\;\;\; \theta \in [-90^o,90^o]
-\]</span> 其中 $ D $ 为图像平面中对角之间的最大距离</p>
-<blockquote>
-<p>寻找直线的<strong>遍历投票</strong>思想在这里是一样的，只不过参数平面交点的获得由<strong>直线相交</strong>变为了<strong>正余弦曲线相交</strong></p>
-</blockquote>
-<hr />
-<h4 id="五一些-hough-线变换的实例建立直观感受">五、一些 $ Hough $
-线变换的实例（建立直观感受）</h4>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines4.png" style="zoom:67%;" /></p>
-<h4 id="六-hough-线变换的实现">六、 $ Hough $ 线变换的实现</h4>
-<p>函数 <code>myHoughLine</code> 实现了 $ Hough $ 线变换，代码如下：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myHoughLine</span><span class="params">(I,lineNum)</span></span></span><br><span class="line"><span class="comment">%% 参数说明</span></span><br><span class="line"><span class="comment">% I为灰度图像</span></span><br><span class="line"><span class="comment">% lineNum为要提取的直线数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Hough线变换</span></span><br><span class="line">BW = edge(I,<span class="string">&#x27;canny&#x27;</span>);    <span class="comment">% 提取边缘，以作为Hough线变换的前景</span></span><br><span class="line">[row,col] = <span class="built_in">size</span>(BW);</span><br><span class="line">D = <span class="built_in">ceil</span>(<span class="built_in">sqrt</span>(row^<span class="number">2</span> + col^<span class="number">2</span>));    <span class="comment">% 图像平面的对角距离，为避免索引时超出数组边界，向上取整</span></span><br><span class="line">Rho = -D:D; Theta = <span class="number">-90</span>:<span class="number">90</span>;    <span class="comment">% 定义参数平面的取值范围</span></span><br><span class="line">Scores = <span class="built_in">zeros</span>(<span class="built_in">length</span>(Rho),<span class="built_in">length</span>(Theta));    <span class="comment">% 创建voting矩阵</span></span><br><span class="line">[x,y] = <span class="built_in">find</span>(BW == <span class="number">1</span>);    <span class="comment">% 取出前景像素作为voting点</span></span><br><span class="line">rho = <span class="built_in">round</span>(x.*<span class="built_in">cosd</span>(Theta) + y.*<span class="built_in">sind</span>(Theta));</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="built_in">size</span>(rho,<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:<span class="built_in">length</span>(Theta)</span><br><span class="line">        Scores(D + rho(<span class="built_in">i</span>,<span class="built_in">j</span>) + <span class="number">1</span>,<span class="built_in">j</span>) = Scores(D + rho(<span class="built_in">i</span>,<span class="built_in">j</span>) + <span class="number">1</span>,<span class="built_in">j</span>) + <span class="number">1</span>;    <span class="comment">% 遍历投票</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">lineMaxValue = maxk(Scores(:),lineNum);</span><br><span class="line">[lineRho,lineTheta] = <span class="built_in">find</span>(Scores &gt;= lineMaxValue(lineNum),lineNum);</span><br><span class="line">lineRho = lineRho - D - <span class="number">1</span>;    <span class="comment">% 记得转换回来</span></span><br><span class="line">lineTheta = lineTheta - <span class="number">90</span> - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 绘制“最强的”lineNum条直线</span></span><br><span class="line"><span class="built_in">figure</span>; imshow(I); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> k = <span class="number">1</span>:lineNum</span><br><span class="line">   n = <span class="number">0.05</span>*row:<span class="number">0.95</span>*row;</span><br><span class="line">   m = (-<span class="built_in">cosd</span>(lineTheta(k))*n + lineRho(k)) / <span class="built_in">sind</span>(lineTheta(k));</span><br><span class="line">   m(m &lt; <span class="number">0.05</span>*col | m &gt; <span class="number">0.95</span>*col) = NaN;    <span class="comment">% 绘制范围不要超过图像边界</span></span><br><span class="line">   <span class="built_in">plot</span>(m,n,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;Linewidth&#x27;</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>测试代码如下：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">close all;clear;clc;tic;</span><br><span class="line">I = imread(<span class="string">&#x27;airport.tif&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">size</span>(I,<span class="number">3</span>) == <span class="number">3</span></span><br><span class="line">    I = rgb2gray(I);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">myHoughLine(I,<span class="number">3</span>);toc;</span><br></pre></td></tr></table></figure>
-<p>对一张机场航拍图进行主干道提取：</p>
-<p><strong>这是原图（可以看出一共有3条主干道）</strong></p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/exam1.png" style="zoom: 67%;" /></p>
-<p><strong>这是使用 $ Hough $ 线变换的提取结果图</strong></p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/exam2.png" style="zoom:67%;" /></p>
-<h4 id="七附录-hough-圆变换">七、附录： $ Hough $ 圆变换</h4>
-<p>$ Hough $
-圆变换的思想与线变换是一致的，区别仅在于参数空间的维数不同。（ $ Hough $
-圆变换的参数空间为 $ a,b,r $ 三维）</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghCircle.png" style="zoom:67%;" /></p>
-]]></content>
-      <categories>
-        <category>图像处理</category>
-        <category>特征检测</category>
-      </categories>
-      <tags>
-        <tag>图像处理</tag>
-        <tag>特征检测</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Harris矩阵和Hessian矩阵</title>
     <url>/2022/04/15/harris-ju-zhen-he-hessian-ju-zhen/</url>
     <content><![CDATA[<h4 id="harris-矩阵使用的是一阶导数"><code>Harris</code>
@@ -653,6 +510,149 @@ href="http://localhost:4000/2022/04/13/dip-zhong-de-hessian-ju-zhen/">DIP
 <h4 id="快速-doh-算法">快速 <code>DoH</code> 算法</h4>
 <p>该算法用在 <code>SURF</code>
 中，使用了盒式模板代替高斯二阶偏导模板，因为盒式模板与图像卷积可借助于<strong>积分图像</strong>进行快速运算</p>
+]]></content>
+      <categories>
+        <category>图像处理</category>
+        <category>特征检测</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+        <tag>特征检测</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hough线变换</title>
+    <url>/2022/03/09/hough-xian-bian-huan/</url>
+    <content><![CDATA[<h4 id="一-hough-变换的参数平面-hough-平面">一、 $ Hough $
+变换的参数平面（ $ Hough $ 平面）</h4>
+<p>在图像平面（ $ Image Plan $ ）的坐标系 $ xOy $
+中，直线方程的<strong>斜截式</strong>为： $ y = px + q $ ，其中 $ p $
+为斜率， $ q $ 为截距</p>
+<p>假设上式所代表的<strong>某条</strong>（ $ p q $ 任意 ）直线上存在一点
+$ (x_{i},y_{i}) $ ，则此点满足 $ y_{i} = px_{i} + q $
+，若将其改写，可变为 <span class="math display">\[
+q = -x_{i}p + y_{i}
+\]</span> 试想，此时若构造一个 $ pOq $ 坐标系，则 $ -x_{i} $ 为斜率， $
+y_{i} $ 为截距，这是一条<strong>确定的直线</strong>！</p>
+<p>换言之， $ Hough $
+变换就是将图像平面的<strong>点</strong>映射为参数平面（ $
+Parametric Plan $ ） 的<strong>线</strong>！</p>
+<p>可以结合下图形象地理解：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines1.png" style="zoom: 67%;" /></p>
+<p>此时，可以在图像空间中考虑另一个点 $ (x_{j},y_{j}) $ ，它与点 $
+(x_{i},y_{i}) $ 共同确定一条直线 $ q_{0} = -p_{0}x + y $</p>
+<p>因为这两点具有<strong>同样的</strong> $ p $ （斜率）和 $ q $
+（截距），因此，二者在参数平面所代表的直线<strong>相交于同一点</strong>
+$ (p_{0}, q_{0}) $</p>
+<p>类似地，点 $ (x_{k},y_{k}) $ 所对应的直线也将经过点 $ (p_{0},q_{0}) $
+！</p>
+<p>由此得出一个直观的<strong>结论</strong>：</p>
+<blockquote>
+<p>图像平面中，同一条直线上的点在参数平面中所对应的线<strong>相交于一点</strong></p>
+<p>并且这一点的坐标为（图像平面直线的<strong>斜率</strong>，图像平面直线的<strong>截距</strong>）</p>
+</blockquote>
+<hr />
+<h4 id="二在-hough-平面中使用-voting-策略寻找直线">二、在 $ Hough $
+平面中使用 $ voting $ 策略寻找直线</h4>
+<p>在参数平面中，越多的直线相交于同一点 $ (p_{0},q_{0}) $
+，那么在图像平面中就有越多的点位于直线 $ y = p_{0}x + q_{0} $
+上，也就是说</p>
+<p><strong>这条直线越像直线</strong>，<strong>这条直线比较明显</strong>，<strong>这条直线比较长</strong>，<strong>这条直线应该被认为是直线并且应该被标识出来</strong></p>
+<p>那么，问题来了，怎么样才能知道这个点 $ (p_{0},q_{0}) $
+被<strong>几条</strong>参数平面中的直线经过呢？ $ (p_{0},q_{0}) $
+又应该取什么值呢？</p>
+<p>$ Hough $
+给出了一种<strong>遍历投票</strong>的解决办法，具体实现如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines2.png" style="zoom:67%;" /></p>
+<p>（1）在 $ pOq $
+坐标系中划分网格（网格的精度根据实际要求自行确定），坐标轴的范围应从实际的最小斜率变化到</p>
+<p>最大斜率、从实际的最小截距变化到最大截距（ $ p_{min} $ 到 $ p_{max} $
+， $ q_{min} $ 到 $ q_{max} $ ）</p>
+<p>（2）对于图像平面中的点 $ (x_{i},y_{i}) $ ，遍历 $ p $ （ $ q $
+也行）的所有<strong>网格取值</strong>，代入表达式 $ q = -x_{i}p + y_{i}$
+中可得到</p>
+<p>相应的 $ q $ （ $ p $
+）值，该值落在哪一个小网格内，就为该网格<strong>投一票</strong></p>
+<p>（3）遍历图像平面中所有的前景点，进行第（2）步操作，最终得到 $ pOq $
+坐标系中所有网格的投票情况</p>
+<p>（4）筛选投票数较多（大于设定阈值）的网格，该网格所代表的 $ p $ 和 $
+q$ 值便在图像平面中确定了直线 $ y_{i} = px_{i} + q $​</p>
+<hr />
+<h4 id="三方法的特点以及局限性">三、方法的特点以及局限性</h4>
+<h5 id="方法的特点">方法的特点：</h5>
+<blockquote>
+<p>如上右图所示，网格划分得越精细，容错率就越低，就越容易受噪声的影响，所找的直线数量就越多</p>
+<p>相反，网格划分得越粗糙，容错率就越高，在一定程度上能克服噪声的影响，但所找的直线越不准确</p>
+<p>因此，网格的划分精度往往取决于实际的需求，而且，挑选筛选直线的阈值也是一门技术活</p>
+</blockquote>
+<h5 id="方法的局限性">方法的局限性：</h5>
+<blockquote>
+<p>当图像平面中的直线接近<strong>竖直</strong>时， $ p $
+的值将变得特别大或特别小，即 $ |p| $ 趋于无穷时， $ pOq $
+平面将无法划分！</p>
+<p>即使硬着头皮划分，计算机也会因庞大的计算量而内存溢出！</p>
+<p>因此，传统意义上的 $ Hough $
+线变换<strong>无法寻找竖直直线</strong>！</p>
+</blockquote>
+<hr />
+<h4 id="四解决传统的-hough-线变换无法寻找竖直直线的问题">四、解决传统的
+$ Hough $ 线变换无法寻找竖直直线的问题</h4>
+<p>使用极坐标方程代替直角坐标方程即可完美地解决这个问题！首先观察下图 $
+a) $ ：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines3.png" style="zoom:67%;" /></p>
+<p>在图像平面中，过原点做一条与直线<strong>垂直</strong>的垂线，该垂线的所代表的<strong>方向向量</strong>可写为：
+<span class="math display">\[
+(\ \rho cos(\theta),\ \rho sin(\theta)\ )
+\]</span> 设直线的方向向量为 $ (m,n) $ ，且经过点 $ (x_{i},y_{i}) $
+，则其方程可写为： <span class="math display">\[
+\frac{x-x_{i}}{m} = \frac{y-y_{i}}{n}
+\]</span> 又因直线与垂线垂直，因此二者的方向向量满足： <span
+class="math display">\[
+(\ \rho cos(\theta),\ \rho sin(\theta)\ ) (m,\ n) =
+m\rho cos(\theta) + n\rho sin(\theta) = 0
+\]</span> 即： <span class="math display">\[
+m\rho cos(\theta) = -n\rho sin(\theta) \\ \\
+\frac{m}{n} = -\frac{\rho sin(\theta)}{\rho cos(\theta)}
+\]</span> 故有： <span class="math display">\[
+\frac{x-x_{i}}{y-y_{i}} = \frac{m}{n} = -\frac{\rho sin(\theta)}{\rho
+cos(\theta)}
+\]</span> 令： <span class="math display">\[
+x_{i} = \rho cos(\theta) \;\;\;\; y_{i} = \rho sin(\theta)
+\]</span> 代入，并化简整理，可得： <span class="math display">\[
+\frac{x-\rho cos(\theta)}{y-\rho sin(\theta)} = -\frac{\rho
+sin(\theta)}{\rho cos(\theta)} \\ \\
+\rho cos(\theta)x - \rho^2cos^2(\theta) = \rho^2sin^2(\theta) - \rho
+sin(\theta)y \\ \\
+\rho cos(\theta)x + \rho sin(\theta)y = \rho^2cos^2(\theta)
++  \rho^2sin^2(\theta) = \rho^2 \\ \\
+\rho = xcos(\theta) + ysin(\theta)
+\]</span>
+可以很明显地看出，在参数平面上，一个<strong>点</strong>映射成了一条<strong>正余弦曲线</strong>，并且横纵坐标轴的取值范围缩减为：
+<span class="math display">\[
+\rho \in [-D,D] \;\;\;\;\;\; \theta \in [-90^o,90^o]
+\]</span> 其中 $ D $ 为图像平面中对角之间的最大距离</p>
+<blockquote>
+<p>寻找直线的<strong>遍历投票</strong>思想在这里是一样的，只不过参数平面交点的获得由<strong>直线相交</strong>变为了<strong>正余弦曲线相交</strong></p>
+</blockquote>
+<hr />
+<h4 id="五一些-hough-线变换的实例建立直观感受">五、一些 $ Hough $
+线变换的实例（建立直观感受）</h4>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines4.png" style="zoom:67%;" /></p>
+<h4 id="六-hough-线变换的实现">六、 $ Hough $ 线变换的实现</h4>
+<p>函数 <code>myHoughLine</code> 实现了 $ Hough $ 线变换，代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myHoughLine</span><span class="params">(I,lineNum)</span></span></span><br><span class="line"><span class="comment">%% 参数说明</span></span><br><span class="line"><span class="comment">% I为灰度图像</span></span><br><span class="line"><span class="comment">% lineNum为要提取的直线数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Hough线变换</span></span><br><span class="line">BW = edge(I,<span class="string">&#x27;canny&#x27;</span>);    <span class="comment">% 提取边缘，以作为Hough线变换的前景</span></span><br><span class="line">[row,col] = <span class="built_in">size</span>(BW);</span><br><span class="line">D = <span class="built_in">ceil</span>(<span class="built_in">sqrt</span>(row^<span class="number">2</span> + col^<span class="number">2</span>));    <span class="comment">% 图像平面的对角距离，为避免索引时超出数组边界，向上取整</span></span><br><span class="line">Rho = -D:D; Theta = <span class="number">-90</span>:<span class="number">90</span>;    <span class="comment">% 定义参数平面的取值范围</span></span><br><span class="line">Scores = <span class="built_in">zeros</span>(<span class="built_in">length</span>(Rho),<span class="built_in">length</span>(Theta));    <span class="comment">% 创建voting矩阵</span></span><br><span class="line">[x,y] = <span class="built_in">find</span>(BW == <span class="number">1</span>);    <span class="comment">% 取出前景像素作为voting点</span></span><br><span class="line">rho = <span class="built_in">round</span>(x.*<span class="built_in">cosd</span>(Theta) + y.*<span class="built_in">sind</span>(Theta));</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="built_in">size</span>(rho,<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:<span class="built_in">length</span>(Theta)</span><br><span class="line">        Scores(D + rho(<span class="built_in">i</span>,<span class="built_in">j</span>) + <span class="number">1</span>,<span class="built_in">j</span>) = Scores(D + rho(<span class="built_in">i</span>,<span class="built_in">j</span>) + <span class="number">1</span>,<span class="built_in">j</span>) + <span class="number">1</span>;    <span class="comment">% 遍历投票</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">lineMaxValue = maxk(Scores(:),lineNum);</span><br><span class="line">[lineRho,lineTheta] = <span class="built_in">find</span>(Scores &gt;= lineMaxValue(lineNum),lineNum);</span><br><span class="line">lineRho = lineRho - D - <span class="number">1</span>;    <span class="comment">% 记得转换回来</span></span><br><span class="line">lineTheta = lineTheta - <span class="number">90</span> - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 绘制“最强的”lineNum条直线</span></span><br><span class="line"><span class="built_in">figure</span>; imshow(I); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> k = <span class="number">1</span>:lineNum</span><br><span class="line">   n = <span class="number">0.05</span>*row:<span class="number">0.95</span>*row;</span><br><span class="line">   m = (-<span class="built_in">cosd</span>(lineTheta(k))*n + lineRho(k)) / <span class="built_in">sind</span>(lineTheta(k));</span><br><span class="line">   m(m &lt; <span class="number">0.05</span>*col | m &gt; <span class="number">0.95</span>*col) = NaN;    <span class="comment">% 绘制范围不要超过图像边界</span></span><br><span class="line">   <span class="built_in">plot</span>(m,n,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;Linewidth&#x27;</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>测试代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">close all;clear;clc;tic;</span><br><span class="line">I = imread(<span class="string">&#x27;airport.tif&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">size</span>(I,<span class="number">3</span>) == <span class="number">3</span></span><br><span class="line">    I = rgb2gray(I);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">myHoughLine(I,<span class="number">3</span>);toc;</span><br></pre></td></tr></table></figure>
+<p>对一张机场航拍图进行主干道提取：</p>
+<p><strong>这是原图（可以看出一共有3条主干道）</strong></p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/exam1.png" style="zoom: 67%;" /></p>
+<p><strong>这是使用 $ Hough $ 线变换的提取结果图</strong></p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/exam2.png" style="zoom:67%;" /></p>
+<h4 id="七附录-hough-圆变换">七、附录： $ Hough $ 圆变换</h4>
+<p>$ Hough $
+圆变换的思想与线变换是一致的，区别仅在于参数空间的维数不同。（ $ Hough $
+圆变换的参数空间为 $ a,b,r $ 三维）</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghCircle.png" style="zoom:67%;" /></p>
 ]]></content>
       <categories>
         <category>图像处理</category>
@@ -1262,7 +1262,7 @@ f(x,y) =
 \]</span>
 从上面我们可以发现两个<strong>很有意思的地方</strong>：（后面自会揭晓）</p>
 <ul>
-<li>$ $</li>
+<li>$ 1/MN $</li>
 <li>$ e^{-j2(ux/M+vy/N)} $ 和 $ e^{j2(ux/M+vy/N)} $</li>
 </ul>
 <hr />
