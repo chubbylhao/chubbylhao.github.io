@@ -20,26 +20,21 @@
     var CONFIG = {"hostname":"chubbylhao.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":220,"display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="通过使用Hexo和GitHub Pages能够快速搭建一个属于你自己的博客网站！">
+  <meta name="description" content="重新对图像的傅里叶变换做一次思考。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Hexo和GitHub_Pages搭建个人博客">
-<meta property="og:url" content="https://chubbylhao.github.io/2022/03/05/shi-yong-hexo-he-github-pages-da-jian-ge-ren-bo-ke/index.html">
+<meta property="og:title" content="图像的傅里叶变换">
+<meta property="og:url" content="https://chubbylhao.github.io/2022/09/10/tu-xiang-de-fu-li-xie-bian-huan/index.html">
 <meta property="og:site_name" content="lh&#39;s Blogs">
-<meta property="og:description" content="通过使用Hexo和GitHub Pages能够快速搭建一个属于你自己的博客网站！">
+<meta property="og:description" content="重新对图像的傅里叶变换做一次思考。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/hugelhao/myPics/main/blogsPics/Git.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hugelhao/myPics/main/blogsPics/ssh_key.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hugelhao/myPics/main/blogsPics/hexo.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hugelhao/myPics/main/blogsPics/starts.png">
-<meta property="article:published_time" content="2022-03-05T05:28:58.000Z">
-<meta property="article:modified_time" content="2022-04-09T11:43:21.550Z">
+<meta property="article:published_time" content="2022-09-10T11:32:01.000Z">
+<meta property="article:modified_time" content="2022-09-10T11:33:49.976Z">
 <meta property="article:author" content="ChubbyLH">
-<meta property="article:tag" content="环境搭建">
-<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="图像处理">
+<meta property="article:tag" content="图像变换">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/hugelhao/myPics/main/blogsPics/Git.png">
 
-<link rel="canonical" href="https://chubbylhao.github.io/2022/03/05/shi-yong-hexo-he-github-pages-da-jian-ge-ren-bo-ke/">
+<link rel="canonical" href="https://chubbylhao.github.io/2022/09/10/tu-xiang-de-fu-li-xie-bian-huan/">
 
 
 <script id="page-configurations">
@@ -52,7 +47,7 @@
   };
 </script>
 
-  <title>使用Hexo和GitHub_Pages搭建个人博客 | lh's Blogs</title>
+  <title>图像的傅里叶变换 | lh's Blogs</title>
   
 
 
@@ -204,7 +199,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://chubbylhao.github.io/2022/03/05/shi-yong-hexo-he-github-pages-da-jian-ge-ren-bo-ke/">
+    <link itemprop="mainEntityOfPage" href="https://chubbylhao.github.io/2022/09/10/tu-xiang-de-fu-li-xie-bian-huan/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -217,7 +212,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          使用Hexo和GitHub_Pages搭建个人博客
+          图像的傅里叶变换
         </h1>
 
         <div class="post-meta">
@@ -226,27 +221,21 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-03-05 13:28:58" itemprop="dateCreated datePublished" datetime="2022-03-05T13:28:58+08:00">2022-03-05</time>
+              <time title="创建时间：2022-09-10 19:32:01 / 修改时间：19:33:49" itemprop="dateCreated datePublished" datetime="2022-09-10T19:32:01+08:00">2022-09-10</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-09 19:43:21" itemprop="dateModified" datetime="2022-04-09T19:43:21+08:00">2022-04-09</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a>
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像处理</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%8F%98%E6%8D%A2/" itemprop="url" rel="index"><span itemprop="name">图像变换</span></a>
                 </span>
             </span>
 
@@ -256,16 +245,16 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.3k</span>
+              <span>0</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>1 分钟</span>
             </span>
-            <div class="post-description">通过使用Hexo和GitHub Pages能够快速搭建一个属于你自己的博客网站！</div>
+            <div class="post-description">重新对图像的傅里叶变换做一次思考。</div>
 
         </div>
       </header>
@@ -276,118 +265,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4
-id="一为-github-pages-的使用建立一个仓库本文仅针对-windows-系统且为最简入门配置">一、为
-GitHub Pages 的使用建立一个仓库（本文仅针对 Windows
-系统，且为<font color="#dd0000">最简入门配置</font>）</h4>
-<p>在 GitHub 中，新建一个仓库，注意仓库名应为
-<strong>githubname.githubname.io</strong> ，其中 githubname 为自己的
-GitHub 账户名</p>
-<hr />
-<h4 id="二使用-hexo-博客框架的前期准备">二、使用 Hexo
-博客框架的前期准备</h4>
-<p>（1）安装 <a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a>
-（除修改安装目录外，其余无脑 next ）</p>
-<p>（2）安装 <a target="_blank" rel="noopener" href="https://git-scm.com/download/win">Git</a>
-版本控制工具 （除修改安装目录外，其余无脑 next ）</p>
-<blockquote>
-<p>以上两个软件在安装时，均将<strong>添加环境变量</strong>纳入了默认选项</p>
-</blockquote>
-<p>（3）配置 Git ：</p>
-<p>1、启动 Git Bash ，输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
-<p>若最终显示：（则说明 Git 安装成功！）</p>
-<p><img src="https://raw.githubusercontent.com/hugelhao/myPics/main/blogsPics/Git.png" alt="确认Git已经安装成功" style="zoom:80%;" /></p>
-<p>2、为了把本地仓库中的内容上传到 GitHub 上，需要先配置 <strong>ssh
-key</strong> ，它是一个 token ，作用是验证上传者的身份</p>
-<p>紧接着上一步，输入命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;email&quot;</span>    <span class="comment"># email是注册Github时所使用的邮箱，其实也可以直接运行此命令（email不用改）</span></span><br></pre></td></tr></table></figure>
-<p>3、接下来连续按 <strong>3</strong> 次回车 <strong>Enter</strong>
-键，在路径 C:.ssh 文件夹下会生成一个名为 <strong>id_rsa.pub</strong>
-的文件，使用</p>
-<p>记事本或者 Notepad++ 等文本编辑器打开，复制里面的内容（该串字符即为
-<strong>ssh key</strong> ）</p>
-<p>4、找到已经建好的 <strong>githubname.githubname.io</strong>
-仓库，点击 <strong>Settings</strong> ，在页面的左侧栏中找到
-<strong>Deploy keys</strong> 并点击，接</p>
-<p>下来选择 <strong>Add deploy key</strong>
-按钮，取一个你觉得好听的名字填在 <strong>Title</strong>
-中，并将上面已经复制的 <strong>ssh key</strong>填入
-<strong>Key</strong>，最后保存</p>
-<p>5、在本地验证 <strong>ssh key</strong>
-设置已经成功：（紧接着上一个命令，输入即可）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<p>若最终显示：（则说明 <strong>ssh key</strong>
-设置成功，当前已经成功地连接上了自己的 GitHub 账户）</p>
-<p><img src="https://raw.githubusercontent.com/hugelhao/myPics/main/blogsPics/ssh_key.png" alt="设置ssh key" style="zoom:80%;" /></p>
-<p>6、接下来，设置自己的用户名和邮箱并查看：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;my_github_name&quot;</span>    <span class="comment"># my_github_name换成自己的用户名</span></span><br><span class="line">git config --global user.email <span class="string">&quot;my_github_email&quot;</span>    <span class="comment"># my_github_email换成自己的邮箱</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 确认是否成功设置（若成功，将显示你的用户名和邮箱号）</span></span><br><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure>
-<hr />
-<h4 id="三安装hexo">三、安装Hexo</h4>
-<p>（1）Hexo 项目必须位于一个单独的文件夹中，在 Git Bash
-中按如下命令可创建：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> D:\Github\hexo_next</span><br><span class="line"><span class="built_in">cd</span> D:\Github\hexo_next</span><br><span class="line">npm install hexo -g    <span class="comment"># 使用npm命令安装Hexo,-g代表全局安装</span></span><br></pre></td></tr></table></figure>
-<p>（2）安装完成后，可通过以下命令检验：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
-<p>若最终显示：（则说明 <strong>Hexo</strong> 安装成功！）</p>
-<p><img src="https://raw.githubusercontent.com/hugelhao/myPics/main/blogsPics/hexo.png" alt="Hexo安装成功" style="zoom:80%;" /></p>
-<p>（3）搭建本地测试环境，首先 cd 到 hexo_next / 目录下，在 Git Bash
-中输入：</p>
-<p><code>hexo generate</code>命令用于生成静态文件，一般可以简写为<code>hexo g</code></p>
-<p><code>hexo server</code>命令用于启动本地服务器，一般可以简写为<code>hexo s</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo init    <span class="comment"># 初始化</span></span><br><span class="line">npm install    <span class="comment"># 安装Hexo所需要的组件</span></span><br><span class="line">hexo g    <span class="comment"># 产生webapp文件</span></span><br><span class="line">hexo s    <span class="comment"># 开启服务器</span></span><br></pre></td></tr></table></figure>
-<p>当显示如下信息时，点击其中的链接<a
-target="_blank" rel="noopener" href="http://localhost:4000/">本地链接</a>，在浏览器可以打开本地博客服务</p>
-<p><img src="https://raw.githubusercontent.com/hugelhao/myPics/main/blogsPics/starts.png" alt="确认本地服务器启动成功" style="zoom:80%;" /></p>
-<hr />
-<h4 id="四连接-hexo-和-github-pages">四、连接 Hexo 和 Github Pages</h4>
-<p>（1）打开 D:_next_config.yml 文件，找到 <strong>deploy</strong>
-字段，改为如下内容：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git</span><br><span class="line">    repository: git@github.com:githubname/githubname.github.io.git</span><br><span class="line">    branch: main</span><br></pre></td></tr></table></figure>
-<p>（2）最后再完成一个扩展插件的安装：（ cd 到 hexo_next / 目录下）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p>（3）到此为止就可以进行首次部署了，紧接着上次命令键入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-<p>此时可以在浏览器输入地址 <strong>githubname.github.io</strong> 确认
-Hexo 是否链接到 GitHub Pages</p>
-<hr />
-<h4 id="五将博客发布到-github-上">五、将博客发布到 Github 上</h4>
-<p>（1）在 Markdown
-编辑器中完成博客的编写后，应养成先在本地预览的好习惯</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s    <span class="comment"># 每次预览时清理一下缓存是很有必要的</span></span><br></pre></td></tr></table></figure>
-<p>其中，默认的服务器端口号为 4000</p>
-<p>（2）博客在本地预览无误后，在 Git Bash 命令窗口（ cd 到 hexo_next /
-目录下）执行以下命令：</p>
-<p><code>hexo clean</code>命令用于清理缓存文件</p>
-<p><code>hexo deploy</code>命令用于部署网站，一般可以简写为<code>hexo d</code></p>
-<p><code>hexo g &amp;&amp; hexo d</code>与<code>hexo d -g</code>等价</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d    <span class="comment"># 推荐使用</span></span><br><span class="line"><span class="comment"># 下面为简写</span></span><br><span class="line">hexo clean &amp;&amp; hexo d -g</span><br></pre></td></tr></table></figure>
-<p>（3）在浏览器中访问自己的博客域名，查看文章是否发布成功（注：网页更新有一定的延迟，请耐心等待几秒！）</p>
-<hr />
-<h4 id="六参考资料">六、参考资料</h4>
-<blockquote>
-<p>该文章是本人的第一篇博客，略显粗糙（对我来说是一种新的尝试！）</p>
-<p>关于 Hexo
-框架更精细的使用，请参考以下链接所指的文章（感谢下面所有的文章作者！）</p>
-</blockquote>
-<p>（1） <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo 官方文档</a></p>
-<p>（2）<a
-target="_blank" rel="noopener" href="https://liuchang.men/2019/03/20/%E8%BF%81%E7%A7%BB%E5%8D%9A%E5%AE%A2%E5%88%B0Hexo(NexT%E4%B8%BB%E9%A2%98)%20+%20GitHub%20Pages/">生命不止，奋斗不息的博客</a></p>
-<p>（3）<a
-target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/269331571">石鹏的博客</a></p>
-<p>（4）<a
-target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/96641789">菜鸟程序员的博客</a></p>
-<p>（5）<a
-target="_blank" rel="noopener" href="https://blog.csdn.net/wsmrzx/article/details/81478103">半虹的博客</a></p>
-<p>（6）<a
-target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000021614307">白小白的博客<strong>（超详细）</strong></a></p>
-<p>（7）<a target="_blank" rel="noopener" href="https://hexo-next.readthedocs.io/zh_CN/latest/">另一份
-Hexo 中文文档<strong>（也超详细</strong>）</a></p>
-<blockquote>
-<p>配置过程中可能会遇到一些小问题，但是基本都能依靠 Google 解决</p>
-<p>是吧，屏幕前的优秀大学生！</p>
-</blockquote>
+        
 
     </div>
 
@@ -403,7 +281,7 @@ Hexo 中文文档<strong>（也超详细</strong>）</a></p>
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://chubbylhao.github.io/2022/03/05/shi-yong-hexo-he-github-pages-da-jian-ge-ren-bo-ke/" title="使用Hexo和GitHub_Pages搭建个人博客">https://chubbylhao.github.io/2022/03/05/shi-yong-hexo-he-github-pages-da-jian-ge-ren-bo-ke/</a>
+    <a href="https://chubbylhao.github.io/2022/09/10/tu-xiang-de-fu-li-xie-bian-huan/" title="图像的傅里叶变换">https://chubbylhao.github.io/2022/09/10/tu-xiang-de-fu-li-xie-bian-huan/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -414,8 +292,8 @@ Hexo 中文文档<strong>（也超详细</strong>）</a></p>
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" rel="tag"><i class="fa fa-tag"></i> 环境搭建</a>
-              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 图像处理</a>
+              <a href="/tags/%E5%9B%BE%E5%83%8F%E5%8F%98%E6%8D%A2/" rel="tag"><i class="fa fa-tag"></i> 图像变换</a>
           </div>
 
         
@@ -423,11 +301,11 @@ Hexo 中文文档<strong>（也超详细</strong>）</a></p>
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2022/03/07/tu-xiang-de-kong-jian-bian-huan/" rel="next" title="图像的空间变换">
-      图像的空间变换 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/04/18/haar-te-zheng/" rel="prev" title="Haar特征">
+      <i class="fa fa-chevron-left"></i> Haar特征
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -486,10 +364,6 @@ Hexo 中文文档<strong>（也超详细</strong>）</a></p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%BA-github-pages-%E7%9A%84%E4%BD%BF%E7%94%A8%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E4%BB%93%E5%BA%93%E6%9C%AC%E6%96%87%E4%BB%85%E9%92%88%E5%AF%B9-windows-%E7%B3%BB%E7%BB%9F%E4%B8%94%E4%B8%BA%E6%9C%80%E7%AE%80%E5%85%A5%E9%97%A8%E9%85%8D%E7%BD%AE"><span class="nav-text">一、为
-GitHub Pages 的使用建立一个仓库（本文仅针对 Windows
-系统，且为最简入门配置）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E4%BD%BF%E7%94%A8-hexo-%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%E7%9A%84%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-text">二、使用 Hexo
-博客框架的前期准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E5%AE%89%E8%A3%85hexo"><span class="nav-text">三、安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E8%BF%9E%E6%8E%A5-hexo-%E5%92%8C-github-pages"><span class="nav-text">四、连接 Hexo 和 Github Pages</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%94%E5%B0%86%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%88%B0-github-%E4%B8%8A"><span class="nav-text">五、将博客发布到 Github 上</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AD%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-text">六、参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -695,6 +569,67 @@ GitHub Pages 的使用建立一个仓库（本文仅针对 Windows
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
+    window.MathJax = {
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

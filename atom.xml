@@ -6,7 +6,7 @@
   <link href="https://chubbylhao.github.io/atom.xml" rel="self"/>
   
   <link href="https://chubbylhao.github.io/"/>
-  <updated>2022-04-18T14:25:16.969Z</updated>
+  <updated>2022-09-10T11:33:49.976Z</updated>
   <id>https://chubbylhao.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>图像的傅里叶变换</title>
+    <link href="https://chubbylhao.github.io/2022/09/10/tu-xiang-de-fu-li-xie-bian-huan/"/>
+    <id>https://chubbylhao.github.io/2022/09/10/tu-xiang-de-fu-li-xie-bian-huan/</id>
+    <published>2022-09-10T11:32:01.000Z</published>
+    <updated>2022-09-10T11:33:49.976Z</updated>
+    
+    
+    <summary type="html">重新对图像的傅里叶变换做一次思考。</summary>
+    
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="图像变换" scheme="https://chubbylhao.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%8F%98%E6%8D%A2/"/>
+    
+    
+    <category term="图像处理" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+    <category term="图像变换" scheme="https://chubbylhao.github.io/tags/%E5%9B%BE%E5%83%8F%E5%8F%98%E6%8D%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>Haar特征</title>
