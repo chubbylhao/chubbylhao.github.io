@@ -1,6 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>DIP中的Hessian矩阵</title>
+    <url>/2022/04/13/dip-zhong-de-hessian-ju-zhen/</url>
+    <content><![CDATA[<h4 id="从泰勒展开说起">从泰勒展开说起</h4>
+<p>将一个一元函数 $ f(x) $ 在 $ x=x_{0} $ 处进行泰勒展开，可得： <span
+class="math display">\[
+f(x_{0} + \Delta x) = f(x_{0}) + f^{&#39;}(x_{0})\Delta x +
+\frac{f^{&#39;&#39;}(x_{0})}{2!}\Delta x^{2} +
+o\lVert\Delta x^{2}\rVert
+\]</span> 同理，将一个二元函数（图像） $ f(x,y) $ 在 $ x=x_{0},y=y_{0} $
+处进行泰勒展开，可得： <span class="math display">\[
+f(x_{0} + \Delta x,y_{0} + \Delta y) = f(x_{0},y_{0}) +
+(f_{x}(x_{0},y_{0})\Delta x + f_{y}(x_{0},y_{0})\Delta y) + \\
+\frac{1}{2!}(f_{xx}(x_{0},y_{0})\Delta x^{2} +
+2f_{xy}(x_{0},y_{0})\Delta x\Delta y + f_{yy}(x_{0},y_{0})\Delta y^{2})
++ o\lVert\Delta x^{2} + \Delta y^{2}\rVert
+\]</span> 其中，我们假设混合二阶偏导数是相等的，即： <span
+class="math display">\[
+f_{xy}(x_{0},y_{0}) = f_{yx}(x_{0},y_{0})
+\]</span> 将其改写成矩阵相乘的形式，有： <span class="math display">\[
+f(x_{0} + \Delta x,y_{0} + \Delta y) = f(x_{0},y_{0})
++ \begin{pmatrix} f_{x}(x_{0},y_{0}) \\ f_{y}(x_{0},y_{0})\end{pmatrix}
+\begin{pmatrix} \Delta x \\ \Delta y\end{pmatrix} \\
++ \frac{1}{2!}\begin{pmatrix} \Delta x &amp; \Delta y\end{pmatrix}
+\begin{pmatrix} f_{xx}(x_{0},y_{0}) &amp; f_{xy}(x_{0},y_{0} \\
+f_{yx}(x_{0},y_{0}) &amp; f_{yy}(x_{0},y_{0})\end{pmatrix}
+\begin{pmatrix} \Delta x \\ \Delta y\end{pmatrix}
++o\lVert\Delta x^{2} + \Delta y^{2}\rVert
+\]</span> 使用“对应”的思想去理解，应有： <span class="math display">\[
+\begin{pmatrix} \Delta x \\ \Delta y\end{pmatrix}\;\; 相当于 \;\;\Delta
+x
+\]</span></p>
+<p><span class="math display">\[
+\begin{pmatrix} \Delta x &amp; \Delta y\end{pmatrix}
+\begin{pmatrix} \Delta x \\ \Delta y\end{pmatrix}\;\; 相当于 \;\;\Delta
+x^{2}
+\]</span></p>
+<p><span class="math display">\[
+\begin{pmatrix} f_{x}(x_{0},y_{0}) \\
+f_{y}(x_{0},y_{0})\end{pmatrix}\;\; 相当于 \;\;f^{&#39;}(x_{0})
+\]</span></p>
+<p><span class="math display">\[
+\begin{pmatrix} f_{xx}(x_{0},y_{0}) &amp; f_{xy}(x_{0},y_{0} \\
+f_{yx}(x_{0},y_{0}) &amp; f_{yy}(x_{0},y_{0})\end{pmatrix}\;\; 相当于
+\;\;f^{&#39;&#39;}(x_{0})
+\]</span></p>
+<p>即一元函数中的 <code>标量变量</code> 对应二元函数中的
+<code>两元素向量变量</code> ，一元函数中的 <code>一阶导数斜率</code>
+对应二元函数中的 <code>一阶导数梯度</code> ，一元函数中的
+<code>二阶导数斜率变化率</code> 对应二元函数中的
+<code>二阶导数Hessian矩阵（梯度变化率）</code>
+，它是一种局部曲率（曲折度）的体现</p>
+<blockquote>
+<p>总之，我们应记住这样一个结论（不严格去纠结）： <code>Hessian</code>
+矩阵就是 <code>二阶导数</code></p>
+<p>而二阶导数在判定函数极值中的重要性是不言而喻的</p>
+</blockquote>
+<hr />
+<h4 id="极值判定准则">极值判定准则</h4>
+<ul>
+<li>一元函数情形</li>
+</ul>
+<p>当一元函数 $ f(x) $ 在点 $ x=x_{0} $ 处的一阶导数 $ f^{'}(x_{0})=0 $
+时：</p>
+<ol type="1">
+<li>若二阶导数 $ f^{''}(x_{0})&gt;0 $ ，则该点为
+<code>极小值点</code></li>
+<li>若二阶导数 $ f^{''}(x_{0})&lt;0 $ ，则该点为
+<code>极大值点</code></li>
+<li>若二阶导数 $ f^{''}(x_{0})=0 $ ，则该点 <code>无法判断</code></li>
+</ol>
+<ul>
+<li>二元函数情形</li>
+</ul>
+<p>当二元函数 $ f(x,y) $ 在点 $ (x_{0},y_{0}) $
+处的一阶导数（即梯度向量）为零时：</p>
+<ol type="1">
+<li>若 <code>Hessian</code> 矩阵正定，即二阶导数值大于零，则该点为
+<code>极小值点</code></li>
+<li>若 <code>Hessian</code> 矩阵负定，即二阶导数值小于零，则该点为
+<code>极大值点</code></li>
+<li>若 <code>Hessian</code>
+矩阵半正定或半负定（其它特征值都为正或负，但是至少有一个特征值为零），则该点
+<code>无法判断</code></li>
+<li>若至少有一个特征值大于零，且至少有一个特征值小于零，那么在大于零的特征值所对应的截面上有极小值，在小于零的特征值所对应的截面上有极大值，实际的二维曲面可以联想
+<code>马鞍面</code> ，该特殊点即为 <code>鞍点</code>
+（该点不是极值点）</li>
+</ol>
+<ul>
+<li>二维 <code>Hessian</code> 矩阵正定性的判定</li>
+</ul>
+<ol type="1">
+<li>正定：两阶顺序主子式都大于零，即要求
+<code>两个特征值都大于零</code></li>
+<li>负定：一阶顺序主子式小于零，二阶顺序主子式大于零，即要求
+<code>两个特征值都小于零</code></li>
+<li>半正定：一个或两个特征值为零，可以检查该函数是否为常值函数或该函数在某一个维度上是否为常值</li>
+<li>鞍点：一个特征值大于零，另一个特征值小于零（该点不是极值点）</li>
+</ol>
+<hr />
+<h4 id="二维-hessian-矩阵和椭圆">二维 <code>Hessian</code>
+矩阵和椭圆</h4>
+<p>一般形式的二元二次方程是双曲线方程，即： <span
+class="math display">\[
+a_{11}x^{2} + a_{22}y^{2} + (a_{12}+a_{21})xy = 1
+\]</span> 写成矩阵的形式为： <span class="math display">\[
+\begin{pmatrix}x &amp; y\end{pmatrix}\begin{pmatrix} a_{11} &amp; a_{12}
+\\ a_{21} &amp; a_{22}\end{pmatrix}\begin{pmatrix}x \\ y\end{pmatrix} =
+1
+\]</span> 当 $ a_{11},a_{22} $
+同号时，该方程就变为一个椭圆方程，而且，椭圆的大小、形状、方位全由
+<code>实对称矩阵</code> 决定</p>
+<p>也就是说，该 <code>实对称矩阵</code>
+的特征值和特征向量与椭圆的大小、形状、方位有着密切的关系</p>
+<blockquote>
+<p>事实上，矩阵的两个特征向量的方向分别对应着椭圆的长短轴的方向</p>
+<p>而矩阵的两个特征值分别对应着椭圆的半短轴、半长轴的平方的倒数</p>
+<p>大特征值及其特征向量对应着椭圆的短轴，小特征值及其特征向量对应着椭圆的长轴（因为存在倒数关系）</p>
+</blockquote>
+<p>具体可参看下图理解：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFeature/Hessian/Hessian.png" style="zoom: 67%;" /></p>
+<hr />
+<h4 id="和图像的联系">和图像的联系</h4>
+<p><code>Hessian</code>
+矩阵可以量化图像中的“平坦区域”、“边缘”和“角”之间的差异，它体现了梯度的局部变化率（即梯度变化的快慢，又称局部曲率、局部曲折度），见下图：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFeature/Hessian/Harris1.png" style="zoom:67%;" /></p>
+<p>某点的 <code>Hessian</code>
+矩阵的特征值及特征向量可以很好地帮助我们判断图像的特征：</p>
+<ul>
+<li>若两个特征值同号且值都较大，那么该点很有可能是斑点或者角点
+<ol type="1">
+<li>都大于零，则为黑斑点或黑角点</li>
+<li>都小于零，则为亮斑点或亮角点</li>
+</ol></li>
+<li>若两个特征值同号且值都较小，那么该点很有可能位于平坦区域</li>
+<li>若两个特征值同号且一个值较大一个值较小，那么该点很有可能位于边缘，且大特征值对应于垂直边缘的特征向量</li>
+</ul>
+<p>详见以下图解：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFeature/Hessian/Harris2.png" style="zoom:67%;" /></p>
+<hr />
+<h4 id="图像中-hessian-矩阵的计算">图像中 <code>Hessian</code>
+矩阵的计算</h4>
+<p>对于一幅图像 $ f(x,y) $ ，其 <code>Hessian</code> 矩阵可以表示为：
+<span class="math display">\[
+\begin{pmatrix} \frac{\partial^{2} f}{\partial x^{2}} &amp;
+\frac{\partial^{2} f}{\partial x \partial y} \\ \frac{\partial^{2}
+f}{\partial y \partial x} &amp; \frac{\partial^{2} f}{\partial
+x^{2}})\end{pmatrix}
+\]</span> 其中：（一阶导数都是按中心差分计算的） <span
+class="math display">\[
+\frac{\partial^{2} f}{\partial x^{2}} = f(x+1,y) + f(x-1,y) -2f(x,y)
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial^{2} f}{\partial y^{2}} = f(x,y+1) + f(x,y-1) -2f(x,y)
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial^{2} f}{\partial x \partial y}
+= \frac{\partial^{2} f}{\partial y \partial x}
+= \frac{[f(x-1,y-1) + f(x+1,y+1)] - [f(x-1,y+1) + f(x+1,y-1)]}{4}
+\]</span></p>
+<hr />
+<h4 id="参考文章">参考文章</h4>
+<p><a href="https://zhuanlan.zhihu.com/p/377754969">Hessian
+矩阵和极值判断</a></p>
+<p><a
+href="https://www.zhihu.com/question/47033644/answer/112864757">矩阵特征值和椭圆长短轴的关系</a></p>
+<p><a
+href="https://blog.csdn.net/qq_34562355/article/details/109225384">Hessian
+矩阵（黑塞矩阵）</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Hessian_matrix">维基百科：
+Hessian 矩阵</a></p>
+<p><a
+href="https://milania.de/blog/Introduction_to_the_Hessian_feature_detector_for_finding_blobs_in_an_image">一个国外大佬的博客</a></p>
+]]></content>
+      <categories>
+        <category>图像处理</category>
+        <category>特征检测</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+        <tag>特征检测</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Haar特征</title>
+    <url>/2022/04/18/haar-te-zheng/</url>
+    <content><![CDATA[<p>网上有关 <code>Haar</code>
+特征的文章很多，并且写得都很好，本人借此机会偷个懒，附上链接：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/38056144">人脸 Haar
+特征快速检测及其特征计算（推荐阅读）</a></p>
+<p><a
+href="https://blog.csdn.net/xizero00/article/details/46929261">特征提取之
+Haar 特征</a></p>
+<p><a
+href="https://blog.csdn.net/zouxy09/article/details/7929570">目标检测的图像特征提取之
+Haar 特征</a></p>
+]]></content>
+      <categories>
+        <category>图像处理</category>
+        <category>特征检测</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+        <tag>特征检测</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HOG特征</title>
     <url>/2022/04/16/hog-te-zheng/</url>
     <content><![CDATA[<p>梯度方向直方图 <code>（Histogram of Oriented Gradient，HOG）</code>
@@ -140,46 +346,138 @@ href="https://www.cnblogs.com/alexme/p/11361563.html">只能说这个是十分�
       </tags>
   </entry>
   <entry>
-    <title>Haar特征</title>
-    <url>/2022/04/18/haar-te-zheng/</url>
-    <content><![CDATA[<p>网上有关 <code>Haar</code>
-特征的文章很多，并且写得都很好，本人借此机会偷个懒，附上链接：</p>
-<p><a href="https://zhuanlan.zhihu.com/p/38056144">人脸 Haar
-特征快速检测及其特征计算（推荐阅读）</a></p>
-<p><a
-href="https://blog.csdn.net/xizero00/article/details/46929261">特征提取之
-Haar 特征</a></p>
-<p><a
-href="https://blog.csdn.net/zouxy09/article/details/7929570">目标检测的图像特征提取之
-Haar 特征</a></p>
-]]></content>
-      <categories>
-        <category>图像处理</category>
-        <category>特征检测</category>
-      </categories>
-      <tags>
-        <tag>图像处理</tag>
-        <tag>特征检测</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LBP特征</title>
-    <url>/2022/04/17/lbp-te-zheng/</url>
-    <content><![CDATA[<p>网上有关 <code>LBP</code>
-特征的文章很多，并且写得都很好，本人借此机会偷个懒，附上链接：</p>
-<p><a
-href="https://blog.csdn.net/quincuntial/article/details/50541815">LBP
-特征原理及代码实现（首推，写得超棒）</a></p>
-<p><a
-href="https://senitco.github.io/2017/06/12/image-feature-lbp/">图像特征提取之
-LBP 特征</a></p>
-<p><a
-href="https://clarkhedi.github.io/2020/09/28/ju-bu-er-zhi-mo-shi-lbp/">局部二值模式（LBP）</a></p>
-<p>下面为图像插值的相关文章：（圆形 <code>LBP</code> 要用到）</p>
-<p><a
-href="https://blog.csdn.net/huang1024rui/article/details/46545329">双线性插值（MATLAB实现）</a></p>
-<p><a href="https://anymechen.github.io/ejq1xAVT-/">图像插值算法及
-MATLAB 实现</a></p>
+    <title>Hough线变换</title>
+    <url>/2022/03/09/hough-xian-bian-huan/</url>
+    <content><![CDATA[<h4 id="一-hough-变换的参数平面-hough-平面">一、 $ Hough $
+变换的参数平面（ $ Hough $ 平面）</h4>
+<p>在图像平面（ $ Image Plan $ ）的坐标系 $ xOy $
+中，直线方程的<strong>斜截式</strong>为： $ y = px + q $ ，其中 $ p $
+为斜率， $ q $ 为截距</p>
+<p>假设上式所代表的<strong>某条</strong>（ $ p q $ 任意 ）直线上存在一点
+$ (x_{i},y_{i}) $ ，则此点满足 $ y_{i} = px_{i} + q $
+，若将其改写，可变为 <span class="math display">\[
+q = -x_{i}p + y_{i}
+\]</span> 试想，此时若构造一个 $ pOq $ 坐标系，则 $ -x_{i} $ 为斜率， $
+y_{i} $ 为截距，这是一条<strong>确定的直线</strong>！</p>
+<p>换言之， $ Hough $
+变换就是将图像平面的<strong>点</strong>映射为参数平面（ $
+Parametric Plan $ ） 的<strong>线</strong>！</p>
+<p>可以结合下图形象地理解：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines1.png" style="zoom: 67%;" /></p>
+<p>此时，可以在图像空间中考虑另一个点 $ (x_{j},y_{j}) $ ，它与点 $
+(x_{i},y_{i}) $ 共同确定一条直线 $ q_{0} = -p_{0}x + y $</p>
+<p>因为这两点具有<strong>同样的</strong> $ p $ （斜率）和 $ q $
+（截距），因此，二者在参数平面所代表的直线<strong>相交于同一点</strong>
+$ (p_{0}, q_{0}) $</p>
+<p>类似地，点 $ (x_{k},y_{k}) $ 所对应的直线也将经过点 $ (p_{0},q_{0}) $
+！</p>
+<p>由此得出一个直观的<strong>结论</strong>：</p>
+<blockquote>
+<p>图像平面中，同一条直线上的点在参数平面中所对应的线<strong>相交于一点</strong></p>
+<p>并且这一点的坐标为（图像平面直线的<strong>斜率</strong>，图像平面直线的<strong>截距</strong>）</p>
+</blockquote>
+<hr />
+<h4 id="二在-hough-平面中使用-voting-策略寻找直线">二、在 $ Hough $
+平面中使用 $ voting $ 策略寻找直线</h4>
+<p>在参数平面中，越多的直线相交于同一点 $ (p_{0},q_{0}) $
+，那么在图像平面中就有越多的点位于直线 $ y = p_{0}x + q_{0} $
+上，也就是说</p>
+<p><strong>这条直线越像直线</strong>，<strong>这条直线比较明显</strong>，<strong>这条直线比较长</strong>，<strong>这条直线应该被认为是直线并且应该被标识出来</strong></p>
+<p>那么，问题来了，怎么样才能知道这个点 $ (p_{0},q_{0}) $
+被<strong>几条</strong>参数平面中的直线经过呢？ $ (p_{0},q_{0}) $
+又应该取什么值呢？</p>
+<p>$ Hough $
+给出了一种<strong>遍历投票</strong>的解决办法，具体实现如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines2.png" style="zoom:67%;" /></p>
+<p>（1）在 $ pOq $
+坐标系中划分网格（网格的精度根据实际要求自行确定），坐标轴的范围应从实际的最小斜率变化到</p>
+<p>最大斜率、从实际的最小截距变化到最大截距（ $ p_{min} $ 到 $ p_{max} $
+， $ q_{min} $ 到 $ q_{max} $ ）</p>
+<p>（2）对于图像平面中的点 $ (x_{i},y_{i}) $ ，遍历 $ p $ （ $ q $
+也行）的所有<strong>网格取值</strong>，代入表达式 $ q = -x_{i}p + y_{i}$
+中可得到</p>
+<p>相应的 $ q $ （ $ p $
+）值，该值落在哪一个小网格内，就为该网格<strong>投一票</strong></p>
+<p>（3）遍历图像平面中所有的前景点，进行第（2）步操作，最终得到 $ pOq $
+坐标系中所有网格的投票情况</p>
+<p>（4）筛选投票数较多（大于设定阈值）的网格，该网格所代表的 $ p $ 和 $
+q$ 值便在图像平面中确定了直线 $ y_{i} = px_{i} + q $​</p>
+<hr />
+<h4 id="三方法的特点以及局限性">三、方法的特点以及局限性</h4>
+<h5 id="方法的特点">方法的特点：</h5>
+<blockquote>
+<p>如上右图所示，网格划分得越精细，容错率就越低，就越容易受噪声的影响，所找的直线数量就越多</p>
+<p>相反，网格划分得越粗糙，容错率就越高，在一定程度上能克服噪声的影响，但所找的直线越不准确</p>
+<p>因此，网格的划分精度往往取决于实际的需求，而且，挑选筛选直线的阈值也是一门技术活</p>
+</blockquote>
+<h5 id="方法的局限性">方法的局限性：</h5>
+<blockquote>
+<p>当图像平面中的直线接近<strong>竖直</strong>时， $ p $
+的值将变得特别大或特别小，即 $ |p| $ 趋于无穷时， $ pOq $
+平面将无法划分！</p>
+<p>即使硬着头皮划分，计算机也会因庞大的计算量而内存溢出！</p>
+<p>因此，传统意义上的 $ Hough $
+线变换<strong>无法寻找竖直直线</strong>！</p>
+</blockquote>
+<hr />
+<h4 id="四解决传统的-hough-线变换无法寻找竖直直线的问题">四、解决传统的
+$ Hough $ 线变换无法寻找竖直直线的问题</h4>
+<p>使用极坐标方程代替直角坐标方程即可完美地解决这个问题！首先观察下图 $
+a) $ ：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines3.png" style="zoom:67%;" /></p>
+<p>在图像平面中，过原点做一条与直线<strong>垂直</strong>的垂线，该垂线的所代表的<strong>方向向量</strong>可写为：
+<span class="math display">\[
+(\ \rho cos(\theta),\ \rho sin(\theta)\ )
+\]</span> 设直线的方向向量为 $ (m,n) $ ，且经过点 $ (x_{i},y_{i}) $
+，则其方程可写为： <span class="math display">\[
+\frac{x-x_{i}}{m} = \frac{y-y_{i}}{n}
+\]</span> 又因直线与垂线垂直，因此二者的方向向量满足： <span
+class="math display">\[
+(\ \rho cos(\theta),\ \rho sin(\theta)\ ) (m,\ n) =
+m\rho cos(\theta) + n\rho sin(\theta) = 0
+\]</span> 即： <span class="math display">\[
+m\rho cos(\theta) = -n\rho sin(\theta) \\ \\
+\frac{m}{n} = -\frac{\rho sin(\theta)}{\rho cos(\theta)}
+\]</span> 故有： <span class="math display">\[
+\frac{x-x_{i}}{y-y_{i}} = \frac{m}{n} = -\frac{\rho sin(\theta)}{\rho
+cos(\theta)}
+\]</span> 令： <span class="math display">\[
+x_{i} = \rho cos(\theta) \;\;\;\; y_{i} = \rho sin(\theta)
+\]</span> 代入，并化简整理，可得： <span class="math display">\[
+\frac{x-\rho cos(\theta)}{y-\rho sin(\theta)} = -\frac{\rho
+sin(\theta)}{\rho cos(\theta)} \\ \\
+\rho cos(\theta)x - \rho^2cos^2(\theta) = \rho^2sin^2(\theta) - \rho
+sin(\theta)y \\ \\
+\rho cos(\theta)x + \rho sin(\theta)y = \rho^2cos^2(\theta)
++  \rho^2sin^2(\theta) = \rho^2 \\ \\
+\rho = xcos(\theta) + ysin(\theta)
+\]</span>
+可以很明显地看出，在参数平面上，一个<strong>点</strong>映射成了一条<strong>正余弦曲线</strong>，并且横纵坐标轴的取值范围缩减为：
+<span class="math display">\[
+\rho \in [-D,D] \;\;\;\;\;\; \theta \in [-90^o,90^o]
+\]</span> 其中 $ D $ 为图像平面中对角之间的最大距离</p>
+<blockquote>
+<p>寻找直线的<strong>遍历投票</strong>思想在这里是一样的，只不过参数平面交点的获得由<strong>直线相交</strong>变为了<strong>正余弦曲线相交</strong></p>
+</blockquote>
+<hr />
+<h4 id="五一些-hough-线变换的实例建立直观感受">五、一些 $ Hough $
+线变换的实例（建立直观感受）</h4>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines4.png" style="zoom:67%;" /></p>
+<h4 id="六-hough-线变换的实现">六、 $ Hough $ 线变换的实现</h4>
+<p>函数 <code>myHoughLine</code> 实现了 $ Hough $ 线变换，代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myHoughLine</span><span class="params">(I,lineNum)</span></span></span><br><span class="line"><span class="comment">%% 参数说明</span></span><br><span class="line"><span class="comment">% I为灰度图像</span></span><br><span class="line"><span class="comment">% lineNum为要提取的直线数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Hough线变换</span></span><br><span class="line">BW = edge(I,<span class="string">&#x27;canny&#x27;</span>);    <span class="comment">% 提取边缘，以作为Hough线变换的前景</span></span><br><span class="line">[row,col] = <span class="built_in">size</span>(BW);</span><br><span class="line">D = <span class="built_in">ceil</span>(<span class="built_in">sqrt</span>(row^<span class="number">2</span> + col^<span class="number">2</span>));    <span class="comment">% 图像平面的对角距离，为避免索引时超出数组边界，向上取整</span></span><br><span class="line">Rho = -D:D; Theta = <span class="number">-90</span>:<span class="number">90</span>;    <span class="comment">% 定义参数平面的取值范围</span></span><br><span class="line">Scores = <span class="built_in">zeros</span>(<span class="built_in">length</span>(Rho),<span class="built_in">length</span>(Theta));    <span class="comment">% 创建voting矩阵</span></span><br><span class="line">[x,y] = <span class="built_in">find</span>(BW == <span class="number">1</span>);    <span class="comment">% 取出前景像素作为voting点</span></span><br><span class="line">rho = <span class="built_in">round</span>(x.*<span class="built_in">cosd</span>(Theta) + y.*<span class="built_in">sind</span>(Theta));</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="built_in">size</span>(rho,<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:<span class="built_in">length</span>(Theta)</span><br><span class="line">        Scores(D + rho(<span class="built_in">i</span>,<span class="built_in">j</span>) + <span class="number">1</span>,<span class="built_in">j</span>) = Scores(D + rho(<span class="built_in">i</span>,<span class="built_in">j</span>) + <span class="number">1</span>,<span class="built_in">j</span>) + <span class="number">1</span>;    <span class="comment">% 遍历投票</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">lineMaxValue = maxk(Scores(:),lineNum);</span><br><span class="line">[lineRho,lineTheta] = <span class="built_in">find</span>(Scores &gt;= lineMaxValue(lineNum),lineNum);</span><br><span class="line">lineRho = lineRho - D - <span class="number">1</span>;    <span class="comment">% 记得转换回来</span></span><br><span class="line">lineTheta = lineTheta - <span class="number">90</span> - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 绘制“最强的”lineNum条直线</span></span><br><span class="line"><span class="built_in">figure</span>; imshow(I); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> k = <span class="number">1</span>:lineNum</span><br><span class="line">   n = <span class="number">0.05</span>*row:<span class="number">0.95</span>*row;</span><br><span class="line">   m = (-<span class="built_in">cosd</span>(lineTheta(k))*n + lineRho(k)) / <span class="built_in">sind</span>(lineTheta(k));</span><br><span class="line">   m(m &lt; <span class="number">0.05</span>*col | m &gt; <span class="number">0.95</span>*col) = NaN;    <span class="comment">% 绘制范围不要超过图像边界</span></span><br><span class="line">   <span class="built_in">plot</span>(m,n,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;Linewidth&#x27;</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>测试代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">close all;clear;clc;tic;</span><br><span class="line">I = imread(<span class="string">&#x27;airport.tif&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">size</span>(I,<span class="number">3</span>) == <span class="number">3</span></span><br><span class="line">    I = rgb2gray(I);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">myHoughLine(I,<span class="number">3</span>);toc;</span><br></pre></td></tr></table></figure>
+<p>对一张机场航拍图进行主干道提取：</p>
+<p><strong>这是原图（可以看出一共有3条主干道）</strong></p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/exam1.png" style="zoom: 67%;" /></p>
+<p><strong>这是使用 $ Hough $ 线变换的提取结果图</strong></p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/exam2.png" style="zoom:67%;" /></p>
+<h4 id="七附录-hough-圆变换">七、附录： $ Hough $ 圆变换</h4>
+<p>$ Hough $
+圆变换的思想与线变换是一致的，区别仅在于参数空间的维数不同。（ $ Hough $
+圆变换的参数空间为 $ a,b,r $ 三维）</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghCircle.png" style="zoom:67%;" /></p>
 ]]></content>
       <categories>
         <category>图像处理</category>
@@ -366,6 +664,34 @@ href="http://localhost:4000/2022/04/13/dip-zhong-de-hessian-ju-zhen/">DIP
       </tags>
   </entry>
   <entry>
+    <title>LBP特征</title>
+    <url>/2022/04/17/lbp-te-zheng/</url>
+    <content><![CDATA[<p>网上有关 <code>LBP</code>
+特征的文章很多，并且写得都很好，本人借此机会偷个懒，附上链接：</p>
+<p><a
+href="https://blog.csdn.net/quincuntial/article/details/50541815">LBP
+特征原理及代码实现（首推，写得超棒）</a></p>
+<p><a
+href="https://senitco.github.io/2017/06/12/image-feature-lbp/">图像特征提取之
+LBP 特征</a></p>
+<p><a
+href="https://clarkhedi.github.io/2020/09/28/ju-bu-er-zhi-mo-shi-lbp/">局部二值模式（LBP）</a></p>
+<p>下面为图像插值的相关文章：（圆形 <code>LBP</code> 要用到）</p>
+<p><a
+href="https://blog.csdn.net/huang1024rui/article/details/46545329">双线性插值（MATLAB实现）</a></p>
+<p><a href="https://anymechen.github.io/ejq1xAVT-/">图像插值算法及
+MATLAB 实现</a></p>
+]]></content>
+      <categories>
+        <category>图像处理</category>
+        <category>特征检测</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+        <tag>特征检测</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python中的函数参数类型</title>
     <url>/2022/04/11/python-zhong-de-han-shu-can-shu-lei-xing/</url>
     <content><![CDATA[<h4 id="位置参数">位置参数</h4>
@@ -466,332 +792,6 @@ Python 教程</a></p>
       </categories>
       <tags>
         <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hough线变换</title>
-    <url>/2022/03/09/hough-xian-bian-huan/</url>
-    <content><![CDATA[<h4 id="一-hough-变换的参数平面-hough-平面">一、 $ Hough $
-变换的参数平面（ $ Hough $ 平面）</h4>
-<p>在图像平面（ $ Image Plan $ ）的坐标系 $ xOy $
-中，直线方程的<strong>斜截式</strong>为： $ y = px + q $ ，其中 $ p $
-为斜率， $ q $ 为截距</p>
-<p>假设上式所代表的<strong>某条</strong>（ $ p q $ 任意 ）直线上存在一点
-$ (x_{i},y_{i}) $ ，则此点满足 $ y_{i} = px_{i} + q $
-，若将其改写，可变为 <span class="math display">\[
-q = -x_{i}p + y_{i}
-\]</span> 试想，此时若构造一个 $ pOq $ 坐标系，则 $ -x_{i} $ 为斜率， $
-y_{i} $ 为截距，这是一条<strong>确定的直线</strong>！</p>
-<p>换言之， $ Hough $
-变换就是将图像平面的<strong>点</strong>映射为参数平面（ $
-Parametric Plan $ ） 的<strong>线</strong>！</p>
-<p>可以结合下图形象地理解：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines1.png" style="zoom: 67%;" /></p>
-<p>此时，可以在图像空间中考虑另一个点 $ (x_{j},y_{j}) $ ，它与点 $
-(x_{i},y_{i}) $ 共同确定一条直线 $ q_{0} = -p_{0}x + y $</p>
-<p>因为这两点具有<strong>同样的</strong> $ p $ （斜率）和 $ q $
-（截距），因此，二者在参数平面所代表的直线<strong>相交于同一点</strong>
-$ (p_{0}, q_{0}) $</p>
-<p>类似地，点 $ (x_{k},y_{k}) $ 所对应的直线也将经过点 $ (p_{0},q_{0}) $
-！</p>
-<p>由此得出一个直观的<strong>结论</strong>：</p>
-<blockquote>
-<p>图像平面中，同一条直线上的点在参数平面中所对应的线<strong>相交于一点</strong></p>
-<p>并且这一点的坐标为（图像平面直线的<strong>斜率</strong>，图像平面直线的<strong>截距</strong>）</p>
-</blockquote>
-<hr />
-<h4 id="二在-hough-平面中使用-voting-策略寻找直线">二、在 $ Hough $
-平面中使用 $ voting $ 策略寻找直线</h4>
-<p>在参数平面中，越多的直线相交于同一点 $ (p_{0},q_{0}) $
-，那么在图像平面中就有越多的点位于直线 $ y = p_{0}x + q_{0} $
-上，也就是说</p>
-<p><strong>这条直线越像直线</strong>，<strong>这条直线比较明显</strong>，<strong>这条直线比较长</strong>，<strong>这条直线应该被认为是直线并且应该被标识出来</strong></p>
-<p>那么，问题来了，怎么样才能知道这个点 $ (p_{0},q_{0}) $
-被<strong>几条</strong>参数平面中的直线经过呢？ $ (p_{0},q_{0}) $
-又应该取什么值呢？</p>
-<p>$ Hough $
-给出了一种<strong>遍历投票</strong>的解决办法，具体实现如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines2.png" style="zoom:67%;" /></p>
-<p>（1）在 $ pOq $
-坐标系中划分网格（网格的精度根据实际要求自行确定），坐标轴的范围应从实际的最小斜率变化到</p>
-<p>最大斜率、从实际的最小截距变化到最大截距（ $ p_{min} $ 到 $ p_{max} $
-， $ q_{min} $ 到 $ q_{max} $ ）</p>
-<p>（2）对于图像平面中的点 $ (x_{i},y_{i}) $ ，遍历 $ p $ （ $ q $
-也行）的所有<strong>网格取值</strong>，代入表达式 $ q = -x_{i}p + y_{i}$
-中可得到</p>
-<p>相应的 $ q $ （ $ p $
-）值，该值落在哪一个小网格内，就为该网格<strong>投一票</strong></p>
-<p>（3）遍历图像平面中所有的前景点，进行第（2）步操作，最终得到 $ pOq $
-坐标系中所有网格的投票情况</p>
-<p>（4）筛选投票数较多（大于设定阈值）的网格，该网格所代表的 $ p $ 和 $
-q$ 值便在图像平面中确定了直线 $ y_{i} = px_{i} + q $​</p>
-<hr />
-<h4 id="三方法的特点以及局限性">三、方法的特点以及局限性</h4>
-<h5 id="方法的特点">方法的特点：</h5>
-<blockquote>
-<p>如上右图所示，网格划分得越精细，容错率就越低，就越容易受噪声的影响，所找的直线数量就越多</p>
-<p>相反，网格划分得越粗糙，容错率就越高，在一定程度上能克服噪声的影响，但所找的直线越不准确</p>
-<p>因此，网格的划分精度往往取决于实际的需求，而且，挑选筛选直线的阈值也是一门技术活</p>
-</blockquote>
-<h5 id="方法的局限性">方法的局限性：</h5>
-<blockquote>
-<p>当图像平面中的直线接近<strong>竖直</strong>时， $ p $
-的值将变得特别大或特别小，即 $ |p| $ 趋于无穷时， $ pOq $
-平面将无法划分！</p>
-<p>即使硬着头皮划分，计算机也会因庞大的计算量而内存溢出！</p>
-<p>因此，传统意义上的 $ Hough $
-线变换<strong>无法寻找竖直直线</strong>！</p>
-</blockquote>
-<hr />
-<h4 id="四解决传统的-hough-线变换无法寻找竖直直线的问题">四、解决传统的
-$ Hough $ 线变换无法寻找竖直直线的问题</h4>
-<p>使用极坐标方程代替直角坐标方程即可完美地解决这个问题！首先观察下图 $
-a) $ ：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines3.png" style="zoom:67%;" /></p>
-<p>在图像平面中，过原点做一条与直线<strong>垂直</strong>的垂线，该垂线的所代表的<strong>方向向量</strong>可写为：
-<span class="math display">\[
-(\ \rho cos(\theta),\ \rho sin(\theta)\ )
-\]</span> 设直线的方向向量为 $ (m,n) $ ，且经过点 $ (x_{i},y_{i}) $
-，则其方程可写为： <span class="math display">\[
-\frac{x-x_{i}}{m} = \frac{y-y_{i}}{n}
-\]</span> 又因直线与垂线垂直，因此二者的方向向量满足： <span
-class="math display">\[
-(\ \rho cos(\theta),\ \rho sin(\theta)\ ) (m,\ n) =
-m\rho cos(\theta) + n\rho sin(\theta) = 0
-\]</span> 即： <span class="math display">\[
-m\rho cos(\theta) = -n\rho sin(\theta) \\ \\
-\frac{m}{n} = -\frac{\rho sin(\theta)}{\rho cos(\theta)}
-\]</span> 故有： <span class="math display">\[
-\frac{x-x_{i}}{y-y_{i}} = \frac{m}{n} = -\frac{\rho sin(\theta)}{\rho
-cos(\theta)}
-\]</span> 令： <span class="math display">\[
-x_{i} = \rho cos(\theta) \;\;\;\; y_{i} = \rho sin(\theta)
-\]</span> 代入，并化简整理，可得： <span class="math display">\[
-\frac{x-\rho cos(\theta)}{y-\rho sin(\theta)} = -\frac{\rho
-sin(\theta)}{\rho cos(\theta)} \\ \\
-\rho cos(\theta)x - \rho^2cos^2(\theta) = \rho^2sin^2(\theta) - \rho
-sin(\theta)y \\ \\
-\rho cos(\theta)x + \rho sin(\theta)y = \rho^2cos^2(\theta)
-+  \rho^2sin^2(\theta) = \rho^2 \\ \\
-\rho = xcos(\theta) + ysin(\theta)
-\]</span>
-可以很明显地看出，在参数平面上，一个<strong>点</strong>映射成了一条<strong>正余弦曲线</strong>，并且横纵坐标轴的取值范围缩减为：
-<span class="math display">\[
-\rho \in [-D,D] \;\;\;\;\;\; \theta \in [-90^o,90^o]
-\]</span> 其中 $ D $ 为图像平面中对角之间的最大距离</p>
-<blockquote>
-<p>寻找直线的<strong>遍历投票</strong>思想在这里是一样的，只不过参数平面交点的获得由<strong>直线相交</strong>变为了<strong>正余弦曲线相交</strong></p>
-</blockquote>
-<hr />
-<h4 id="五一些-hough-线变换的实例建立直观感受">五、一些 $ Hough $
-线变换的实例（建立直观感受）</h4>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghLines4.png" style="zoom:67%;" /></p>
-<h4 id="六-hough-线变换的实现">六、 $ Hough $ 线变换的实现</h4>
-<p>函数 <code>myHoughLine</code> 实现了 $ Hough $ 线变换，代码如下：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myHoughLine</span><span class="params">(I,lineNum)</span></span></span><br><span class="line"><span class="comment">%% 参数说明</span></span><br><span class="line"><span class="comment">% I为灰度图像</span></span><br><span class="line"><span class="comment">% lineNum为要提取的直线数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Hough线变换</span></span><br><span class="line">BW = edge(I,<span class="string">&#x27;canny&#x27;</span>);    <span class="comment">% 提取边缘，以作为Hough线变换的前景</span></span><br><span class="line">[row,col] = <span class="built_in">size</span>(BW);</span><br><span class="line">D = <span class="built_in">ceil</span>(<span class="built_in">sqrt</span>(row^<span class="number">2</span> + col^<span class="number">2</span>));    <span class="comment">% 图像平面的对角距离，为避免索引时超出数组边界，向上取整</span></span><br><span class="line">Rho = -D:D; Theta = <span class="number">-90</span>:<span class="number">90</span>;    <span class="comment">% 定义参数平面的取值范围</span></span><br><span class="line">Scores = <span class="built_in">zeros</span>(<span class="built_in">length</span>(Rho),<span class="built_in">length</span>(Theta));    <span class="comment">% 创建voting矩阵</span></span><br><span class="line">[x,y] = <span class="built_in">find</span>(BW == <span class="number">1</span>);    <span class="comment">% 取出前景像素作为voting点</span></span><br><span class="line">rho = <span class="built_in">round</span>(x.*<span class="built_in">cosd</span>(Theta) + y.*<span class="built_in">sind</span>(Theta));</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="built_in">size</span>(rho,<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:<span class="built_in">length</span>(Theta)</span><br><span class="line">        Scores(D + rho(<span class="built_in">i</span>,<span class="built_in">j</span>) + <span class="number">1</span>,<span class="built_in">j</span>) = Scores(D + rho(<span class="built_in">i</span>,<span class="built_in">j</span>) + <span class="number">1</span>,<span class="built_in">j</span>) + <span class="number">1</span>;    <span class="comment">% 遍历投票</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">lineMaxValue = maxk(Scores(:),lineNum);</span><br><span class="line">[lineRho,lineTheta] = <span class="built_in">find</span>(Scores &gt;= lineMaxValue(lineNum),lineNum);</span><br><span class="line">lineRho = lineRho - D - <span class="number">1</span>;    <span class="comment">% 记得转换回来</span></span><br><span class="line">lineTheta = lineTheta - <span class="number">90</span> - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 绘制“最强的”lineNum条直线</span></span><br><span class="line"><span class="built_in">figure</span>; imshow(I); <span class="built_in">hold</span> on;</span><br><span class="line"><span class="keyword">for</span> k = <span class="number">1</span>:lineNum</span><br><span class="line">   n = <span class="number">0.05</span>*row:<span class="number">0.95</span>*row;</span><br><span class="line">   m = (-<span class="built_in">cosd</span>(lineTheta(k))*n + lineRho(k)) / <span class="built_in">sind</span>(lineTheta(k));</span><br><span class="line">   m(m &lt; <span class="number">0.05</span>*col | m &gt; <span class="number">0.95</span>*col) = NaN;    <span class="comment">% 绘制范围不要超过图像边界</span></span><br><span class="line">   <span class="built_in">plot</span>(m,n,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;Linewidth&#x27;</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">hold</span> off;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>测试代码如下：</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">close all;clear;clc;tic;</span><br><span class="line">I = imread(<span class="string">&#x27;airport.tif&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">size</span>(I,<span class="number">3</span>) == <span class="number">3</span></span><br><span class="line">    I = rgb2gray(I);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">myHoughLine(I,<span class="number">3</span>);toc;</span><br></pre></td></tr></table></figure>
-<p>对一张机场航拍图进行主干道提取：</p>
-<p><strong>这是原图（可以看出一共有3条主干道）</strong></p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/exam1.png" style="zoom: 67%;" /></p>
-<p><strong>这是使用 $ Hough $ 线变换的提取结果图</strong></p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/exam2.png" style="zoom:67%;" /></p>
-<h4 id="七附录-hough-圆变换">七、附录： $ Hough $ 圆变换</h4>
-<p>$ Hough $
-圆变换的思想与线变换是一致的，区别仅在于参数空间的维数不同。（ $ Hough $
-圆变换的参数空间为 $ a,b,r $ 三维）</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/featureDetection/Hough/houghCircle.png" style="zoom:67%;" /></p>
-]]></content>
-      <categories>
-        <category>图像处理</category>
-        <category>特征检测</category>
-      </categories>
-      <tags>
-        <tag>图像处理</tag>
-        <tag>特征检测</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DIP中的Hessian矩阵</title>
-    <url>/2022/04/13/dip-zhong-de-hessian-ju-zhen/</url>
-    <content><![CDATA[<h4 id="从泰勒展开说起">从泰勒展开说起</h4>
-<p>将一个一元函数 $ f(x) $ 在 $ x=x_{0} $ 处进行泰勒展开，可得： <span
-class="math display">\[
-f(x_{0} + \Delta x) = f(x_{0}) + f^{&#39;}(x_{0})\Delta x +
-\frac{f^{&#39;&#39;}(x_{0})}{2!}\Delta x^{2} +
-o\lVert\Delta x^{2}\rVert
-\]</span> 同理，将一个二元函数（图像） $ f(x,y) $ 在 $ x=x_{0},y=y_{0} $
-处进行泰勒展开，可得： <span class="math display">\[
-f(x_{0} + \Delta x,y_{0} + \Delta y) = f(x_{0},y_{0}) +
-(f_{x}(x_{0},y_{0})\Delta x + f_{y}(x_{0},y_{0})\Delta y) + \\
-\frac{1}{2!}(f_{xx}(x_{0},y_{0})\Delta x^{2} +
-2f_{xy}(x_{0},y_{0})\Delta x\Delta y + f_{yy}(x_{0},y_{0})\Delta y^{2})
-+ o\lVert\Delta x^{2} + \Delta y^{2}\rVert
-\]</span> 其中，我们假设混合二阶偏导数是相等的，即： <span
-class="math display">\[
-f_{xy}(x_{0},y_{0}) = f_{yx}(x_{0},y_{0})
-\]</span> 将其改写成矩阵相乘的形式，有： <span class="math display">\[
-f(x_{0} + \Delta x,y_{0} + \Delta y) = f(x_{0},y_{0})
-+ \begin{pmatrix} f_{x}(x_{0},y_{0}) \\ f_{y}(x_{0},y_{0})\end{pmatrix}
-\begin{pmatrix} \Delta x \\ \Delta y\end{pmatrix} \\
-+ \frac{1}{2!}\begin{pmatrix} \Delta x &amp; \Delta y\end{pmatrix}
-\begin{pmatrix} f_{xx}(x_{0},y_{0}) &amp; f_{xy}(x_{0},y_{0} \\
-f_{yx}(x_{0},y_{0}) &amp; f_{yy}(x_{0},y_{0})\end{pmatrix}
-\begin{pmatrix} \Delta x \\ \Delta y\end{pmatrix}
-+o\lVert\Delta x^{2} + \Delta y^{2}\rVert
-\]</span> 使用“对应”的思想去理解，应有： <span class="math display">\[
-\begin{pmatrix} \Delta x \\ \Delta y\end{pmatrix}\;\; 相当于 \;\;\Delta
-x
-\]</span></p>
-<p><span class="math display">\[
-\begin{pmatrix} \Delta x &amp; \Delta y\end{pmatrix}
-\begin{pmatrix} \Delta x \\ \Delta y\end{pmatrix}\;\; 相当于 \;\;\Delta
-x^{2}
-\]</span></p>
-<p><span class="math display">\[
-\begin{pmatrix} f_{x}(x_{0},y_{0}) \\
-f_{y}(x_{0},y_{0})\end{pmatrix}\;\; 相当于 \;\;f^{&#39;}(x_{0})
-\]</span></p>
-<p><span class="math display">\[
-\begin{pmatrix} f_{xx}(x_{0},y_{0}) &amp; f_{xy}(x_{0},y_{0} \\
-f_{yx}(x_{0},y_{0}) &amp; f_{yy}(x_{0},y_{0})\end{pmatrix}\;\; 相当于
-\;\;f^{&#39;&#39;}(x_{0})
-\]</span></p>
-<p>即一元函数中的 <code>标量变量</code> 对应二元函数中的
-<code>两元素向量变量</code> ，一元函数中的 <code>一阶导数斜率</code>
-对应二元函数中的 <code>一阶导数梯度</code> ，一元函数中的
-<code>二阶导数斜率变化率</code> 对应二元函数中的
-<code>二阶导数Hessian矩阵（梯度变化率）</code>
-，它是一种局部曲率（曲折度）的体现</p>
-<blockquote>
-<p>总之，我们应记住这样一个结论（不严格去纠结）： <code>Hessian</code>
-矩阵就是 <code>二阶导数</code></p>
-<p>而二阶导数在判定函数极值中的重要性是不言而喻的</p>
-</blockquote>
-<hr />
-<h4 id="极值判定准则">极值判定准则</h4>
-<ul>
-<li>一元函数情形</li>
-</ul>
-<p>当一元函数 $ f(x) $ 在点 $ x=x_{0} $ 处的一阶导数 $ f^{'}(x_{0})=0 $
-时：</p>
-<ol type="1">
-<li>若二阶导数 $ f^{''}(x_{0})&gt;0 $ ，则该点为
-<code>极小值点</code></li>
-<li>若二阶导数 $ f^{''}(x_{0})&lt;0 $ ，则该点为
-<code>极大值点</code></li>
-<li>若二阶导数 $ f^{''}(x_{0})=0 $ ，则该点 <code>无法判断</code></li>
-</ol>
-<ul>
-<li>二元函数情形</li>
-</ul>
-<p>当二元函数 $ f(x,y) $ 在点 $ (x_{0},y_{0}) $
-处的一阶导数（即梯度向量）为零时：</p>
-<ol type="1">
-<li>若 <code>Hessian</code> 矩阵正定，即二阶导数值大于零，则该点为
-<code>极小值点</code></li>
-<li>若 <code>Hessian</code> 矩阵负定，即二阶导数值小于零，则该点为
-<code>极大值点</code></li>
-<li>若 <code>Hessian</code>
-矩阵半正定或半负定（其它特征值都为正或负，但是至少有一个特征值为零），则该点
-<code>无法判断</code></li>
-<li>若至少有一个特征值大于零，且至少有一个特征值小于零，那么在大于零的特征值所对应的截面上有极小值，在小于零的特征值所对应的截面上有极大值，实际的二维曲面可以联想
-<code>马鞍面</code> ，该特殊点即为 <code>鞍点</code>
-（该点不是极值点）</li>
-</ol>
-<ul>
-<li>二维 <code>Hessian</code> 矩阵正定性的判定</li>
-</ul>
-<ol type="1">
-<li>正定：两阶顺序主子式都大于零，即要求
-<code>两个特征值都大于零</code></li>
-<li>负定：一阶顺序主子式小于零，二阶顺序主子式大于零，即要求
-<code>两个特征值都小于零</code></li>
-<li>半正定：一个或两个特征值为零，可以检查该函数是否为常值函数或该函数在某一个维度上是否为常值</li>
-<li>鞍点：一个特征值大于零，另一个特征值小于零（该点不是极值点）</li>
-</ol>
-<hr />
-<h4 id="二维-hessian-矩阵和椭圆">二维 <code>Hessian</code>
-矩阵和椭圆</h4>
-<p>一般形式的二元二次方程是双曲线方程，即： <span
-class="math display">\[
-a_{11}x^{2} + a_{22}y^{2} + (a_{12}+a_{21})xy = 1
-\]</span> 写成矩阵的形式为： <span class="math display">\[
-\begin{pmatrix}x &amp; y\end{pmatrix}\begin{pmatrix} a_{11} &amp; a_{12}
-\\ a_{21} &amp; a_{22}\end{pmatrix}\begin{pmatrix}x \\ y\end{pmatrix} =
-1
-\]</span> 当 $ a_{11},a_{22} $
-同号时，该方程就变为一个椭圆方程，而且，椭圆的大小、形状、方位全由
-<code>实对称矩阵</code> 决定</p>
-<p>也就是说，该 <code>实对称矩阵</code>
-的特征值和特征向量与椭圆的大小、形状、方位有着密切的关系</p>
-<blockquote>
-<p>事实上，矩阵的两个特征向量的方向分别对应着椭圆的长短轴的方向</p>
-<p>而矩阵的两个特征值分别对应着椭圆的半短轴、半长轴的平方的倒数</p>
-<p>大特征值及其特征向量对应着椭圆的短轴，小特征值及其特征向量对应着椭圆的长轴（因为存在倒数关系）</p>
-</blockquote>
-<p>具体可参看下图理解：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFeature/Hessian/Hessian.png" style="zoom: 67%;" /></p>
-<hr />
-<h4 id="和图像的联系">和图像的联系</h4>
-<p><code>Hessian</code>
-矩阵可以量化图像中的“平坦区域”、“边缘”和“角”之间的差异，它体现了梯度的局部变化率（即梯度变化的快慢，又称局部曲率、局部曲折度），见下图：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFeature/Hessian/Harris1.png" style="zoom:67%;" /></p>
-<p>某点的 <code>Hessian</code>
-矩阵的特征值及特征向量可以很好地帮助我们判断图像的特征：</p>
-<ul>
-<li>若两个特征值同号且值都较大，那么该点很有可能是斑点或者角点
-<ol type="1">
-<li>都大于零，则为黑斑点或黑角点</li>
-<li>都小于零，则为亮斑点或亮角点</li>
-</ol></li>
-<li>若两个特征值同号且值都较小，那么该点很有可能位于平坦区域</li>
-<li>若两个特征值同号且一个值较大一个值较小，那么该点很有可能位于边缘，且大特征值对应于垂直边缘的特征向量</li>
-</ul>
-<p>详见以下图解：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFeature/Hessian/Harris2.png" style="zoom:67%;" /></p>
-<hr />
-<h4 id="图像中-hessian-矩阵的计算">图像中 <code>Hessian</code>
-矩阵的计算</h4>
-<p>对于一幅图像 $ f(x,y) $ ，其 <code>Hessian</code> 矩阵可以表示为：
-<span class="math display">\[
-\begin{pmatrix} \frac{\partial^{2} f}{\partial x^{2}} &amp;
-\frac{\partial^{2} f}{\partial x \partial y} \\ \frac{\partial^{2}
-f}{\partial y \partial x} &amp; \frac{\partial^{2} f}{\partial
-x^{2}})\end{pmatrix}
-\]</span> 其中：（一阶导数都是按中心差分计算的） <span
-class="math display">\[
-\frac{\partial^{2} f}{\partial x^{2}} = f(x+1,y) + f(x-1,y) -2f(x,y)
-\]</span></p>
-<p><span class="math display">\[
-\frac{\partial^{2} f}{\partial y^{2}} = f(x,y+1) + f(x,y-1) -2f(x,y)
-\]</span></p>
-<p><span class="math display">\[
-\frac{\partial^{2} f}{\partial x \partial y}
-= \frac{\partial^{2} f}{\partial y \partial x}
-= \frac{[f(x-1,y-1) + f(x+1,y+1)] - [f(x-1,y+1) + f(x+1,y-1)]}{4}
-\]</span></p>
-<hr />
-<h4 id="参考文章">参考文章</h4>
-<p><a href="https://zhuanlan.zhihu.com/p/377754969">Hessian
-矩阵和极值判断</a></p>
-<p><a
-href="https://www.zhihu.com/question/47033644/answer/112864757">矩阵特征值和椭圆长短轴的关系</a></p>
-<p><a
-href="https://blog.csdn.net/qq_34562355/article/details/109225384">Hessian
-矩阵（黑塞矩阵）</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Hessian_matrix">维基百科：
-Hessian 矩阵</a></p>
-<p><a
-href="https://milania.de/blog/Introduction_to_the_Hessian_feature_detector_for_finding_blobs_in_an_image">一个国外大佬的博客</a></p>
-]]></content>
-      <categories>
-        <category>图像处理</category>
-        <category>特征检测</category>
-      </categories>
-      <tags>
-        <tag>图像处理</tag>
-        <tag>特征检测</tag>
       </tags>
   </entry>
   <entry>
@@ -1245,6 +1245,146 @@ x^{2}})\end{pmatrix}
       </tags>
   </entry>
   <entry>
+    <title>图像的傅里叶变换</title>
+    <url>/2022/09/10/tu-xiang-de-fu-li-xie-bian-huan/</url>
+    <content><![CDATA[<h4 id="先做几点声明">先做几点声明</h4>
+<ul>
+<li>图像数据是<strong>实值</strong>的，因此图像矩阵是<strong>实矩阵</strong></li>
+<li>本文将从矩阵的观点重新认识二维离散傅里叶变换</li>
+</ul>
+<hr />
+<h4 id="变换公式">变换公式</h4>
+<p>假设图像的大小为 $ M*N $ ，则正变换为： <span class="math display">\[
+F(u,v) = \sum_{x=0}^{M-1}\sum_{y=0}^{N-1}f(x,y)e^{-j2\pi(ux/M+vy/N)}
+\]</span> 逆变换为： <span class="math display">\[
+f(x,y) =
+\frac{1}{MN}\sum_{u=0}^{M-1}\sum_{v=0}^{N-1}F(u,v)e^{j2\pi(ux/M+vy/N)}
+\]</span>
+从上面我们可以发现两个<strong>很有意思的地方</strong>：（后面自会揭晓）</p>
+<ul>
+<li>$ $</li>
+<li>$ e^{-j2(ux/M+vy/N)} $ 和 $ e^{j2(ux/M+vy/N)} $</li>
+</ul>
+<hr />
+<h4 id="正变换">正变换</h4>
+<p>傅里叶变换核是可分离的，故正变换可以改写为： <span
+class="math display">\[
+F(u,v) = \sum_{x=0}^{M-1}\bigg(\sum_{y=0}^{N-1}f(x,y)e^{-j2\pi
+vy/N}\bigg)e^{-j2\pi ux/M}
+\]</span> 用矩阵来表示，就是： <span class="math display">\[
+F(u,v) =
+\left(
+\begin{matrix}
+1 &amp; 1 &amp; \cdots &amp; 1\\
+1 &amp; e^{-j2\pi \frac{1}{M}} &amp; \cdots &amp; e^{-j2\pi
+\frac{M-1}{M}}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+1 &amp; e^{-j2\pi \frac{M-1}{M}} &amp; \cdots &amp; e^{-j2\pi
+\frac{(M-1)^2}{M}}\\
+\end{matrix}
+\right)_{M\times M}
+f(x,y)_{M\times N}
+\left(
+\begin{matrix}
+1 &amp; 1 &amp; \cdots &amp; 1\\
+1 &amp; e^{-j2\pi \frac{1}{N}} &amp; \cdots &amp; e^{-j2\pi
+\frac{N-1}{N}}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+1 &amp; e^{-j2\pi \frac{N-1}{N}} &amp; \cdots &amp; e^{-j2\pi
+\frac{(N-1)^2}{N}}\\
+\end{matrix}
+\right)_{N\times N}
+\]</span> 上述矩阵有以下特点：</p>
+<ul>
+<li>对称的</li>
+<li>行(列)向量是正交的</li>
+<li>行(列)向量不是规范正交的</li>
+<li>欲令行(列)向量规范化，可在矩阵前乘以如下因子：</li>
+</ul>
+<p><span class="math display">\[
+\frac{1}{\sqrt{M}}\,\,和\,\,\frac{1}{\sqrt{N}}
+\]</span></p>
+<p>当上述矩阵变为规范正交矩阵时，满足： <span class="math display">\[
+MM^{*T}=M^{*T}M=E\,\,和\,\,NN^{*T}=N^{*T}N=E \\
+M^{-1}=M^{*T}\,\, 和 \,\,N^{-1}=N^{*T}
+\]</span> <strong>M</strong> 矩阵和 <strong>N</strong> 矩阵在
+<strong>M</strong> 和 <strong>N</strong> 的值确定后即可确定</p>
+<p>在 <strong>MATLAB</strong> 中编写一小段代码来实现正变换：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">res</span> = <span class="title">myfft2</span><span class="params">(matrix)</span></span></span><br><span class="line">[M, N] = <span class="built_in">size</span>(matrix);</span><br><span class="line">matM = <span class="built_in">zeros</span>(M);</span><br><span class="line">matN = <span class="built_in">zeros</span>(N);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:M</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:M</span><br><span class="line">        matM(<span class="built_in">i</span>,<span class="built_in">j</span>) = <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*(<span class="built_in">i</span><span class="number">-1</span>)*(<span class="built_in">j</span><span class="number">-1</span>)/M);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:N</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:N</span><br><span class="line">        matN(<span class="built_in">i</span>,<span class="built_in">j</span>) = <span class="built_in">exp</span>(<span class="number">-1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*(<span class="built_in">i</span><span class="number">-1</span>)*(<span class="built_in">j</span><span class="number">-1</span>)/N);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">res = matM * matrix * matN;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>再写一段用于和 <strong>MATLAB</strong> 自带函数 <code>fft2</code>
+作比较的测试代码：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">9</span>;<span class="number">2</span>,<span class="number">0</span>,<span class="number">8</span>,<span class="number">7</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">6</span>]</span><br><span class="line">B = fft2(A)</span><br><span class="line">C = myfft2(A)</span><br></pre></td></tr></table></figure>
+<p>运行后，发现 <strong>B</strong> 和 <strong>C</strong> 的结果相同</p>
+<hr />
+<h4 id="逆变换">逆变换</h4>
+<p>思路同正变换一样，但有 <strong>2</strong>
+处不同（就是上面提到的<strong>很有意思的地方</strong>）</p>
+<ul>
+<li>一是系数（矩阵<strong>求逆</strong>产生的）</li>
+<li>二是变换核（注意<strong>共轭</strong>关系）</li>
+</ul>
+<p>体现在公式中，就是： <span class="math display">\[
+\frac{1}{\sqrt{MN}}F(u,v) =
+\frac{1}{\sqrt{M}}\left(
+\begin{matrix}
+1 &amp; 1 &amp; \cdots &amp; 1\\
+1 &amp; e^{-j2\pi \frac{1}{M}} &amp; \cdots &amp; e^{-j2\pi
+\frac{M-1}{M}}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+1 &amp; e^{-j2\pi \frac{M-1}{M}} &amp; \cdots &amp; e^{-j2\pi
+\frac{(M-1)^2}{M}}\\
+\end{matrix}
+\right)
+f(x,y)
+\frac{1}{\sqrt{N}}\left(
+\begin{matrix}
+1 &amp; 1 &amp; \cdots &amp; 1\\
+1 &amp; e^{-j2\pi \frac{1}{N}} &amp; \cdots &amp; e^{-j2\pi
+\frac{N-1}{N}}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+1 &amp; e^{-j2\pi \frac{N-1}{N}} &amp; \cdots &amp; e^{-j2\pi
+\frac{(N-1)^2}{N}}\\
+\end{matrix}
+\right)
+\]</span></p>
+<p><span class="math display">\[
+\frac{1}{MN}\left(
+\begin{matrix}
+1 &amp; 1 &amp; \cdots &amp; 1\\
+1 &amp; e^{j2\pi \frac{1}{M}} &amp; \cdots &amp; e^{j2\pi
+\frac{M-1}{M}}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+1 &amp; e^{j2\pi \frac{M-1}{M}} &amp; \cdots &amp; e^{j2\pi
+\frac{(M-1)^2}{M}}\\
+\end{matrix}
+\right)F(u,v)\left(
+\begin{matrix}
+1 &amp; 1 &amp; \cdots &amp; 1\\
+1 &amp; e^{j2\pi \frac{1}{M}} &amp; \cdots &amp; e^{j2\pi
+\frac{M-1}{M}}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+1 &amp; e^{j2\pi \frac{M-1}{M}} &amp; \cdots &amp; e^{j2\pi
+\frac{(M-1)^2}{M}}\\
+\end{matrix}
+\right) =
+f(x,y)
+\]</span></p>
+<p>同样可以编写代码：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">res</span> = <span class="title">myifft2</span><span class="params">(matrix)</span></span></span><br><span class="line">[M, N] = <span class="built_in">size</span>(matrix);</span><br><span class="line">matM = <span class="built_in">zeros</span>(M);</span><br><span class="line">matN = <span class="built_in">zeros</span>(N);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:M</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:M</span><br><span class="line">        matM(<span class="built_in">i</span>,<span class="built_in">j</span>) = <span class="built_in">exp</span>(<span class="number">1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*(<span class="built_in">i</span><span class="number">-1</span>)*(<span class="built_in">j</span><span class="number">-1</span>)/M);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:N</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:N</span><br><span class="line">        matN(<span class="built_in">i</span>,<span class="built_in">j</span>) = <span class="built_in">exp</span>(<span class="number">1</span><span class="built_in">i</span>*<span class="number">2</span>*<span class="built_in">pi</span>*(<span class="built_in">i</span><span class="number">-1</span>)*(<span class="built_in">j</span><span class="number">-1</span>)/N);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">res = <span class="built_in">real</span>(matM * matrix * matN / (M * N));</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>做测试：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">9</span>;<span class="number">2</span>,<span class="number">0</span>,<span class="number">8</span>,<span class="number">7</span>;<span class="number">1</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">6</span>]</span><br><span class="line">B = fft2(A)</span><br><span class="line"><span class="comment">% C = myfft2(A)</span></span><br><span class="line">D = ifft2(B)</span><br><span class="line">E = myifft2(B)</span><br></pre></td></tr></table></figure>
+<p>发现结果一致</p>
+]]></content>
+      <categories>
+        <category>图像处理</category>
+        <category>图像变换</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+        <tag>图像变换</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>图像的空间变换</title>
     <url>/2022/03/07/tu-xiang-de-kong-jian-bian-huan/</url>
     <content><![CDATA[<h4 id="一引言">一、引言</h4>
@@ -1535,6 +1675,165 @@ href="https://cloud.tencent.com/developer/article/1638969">周旋的博客</a></
       </tags>
   </entry>
   <entry>
+    <title>图像聚类分割中经典的k-means和fuzzy c-means算法</title>
+    <url>/2022/04/01/tu-xiang-ju-lei-fen-ge-zhong-jing-dian-de-k-means-he-fuzzy-c-means-suan-fa/</url>
+    <content><![CDATA[<h4 id="一-k-means-算法和-fuzzy-c-means-算法概述">一、 $ k-means $
+算法和 $ fuzzy-c-means $ 算法概述</h4>
+<p>$ k-means $ 算法和 $ fuzzy-c-means $
+算法都是基于<strong>划分</strong>的聚类方法，该方法的核心思想是：</p>
+<p>将待分割目标分类为不同的簇，使得同一簇内的个体<strong>相似度</strong>最高、不同簇之间的个体<strong>差异度</strong>最高</p>
+<p>$ fuzzy-c-means $ 算法由 $ k-means $
+算法改进而来（二者可用<strong>统一理论</strong>描述），改变了<strong>“非此即彼”</strong>的分类观念</p>
+<p>$ k-means $ 为<strong>硬聚类</strong>算法，而$ fuzzy-c-means $
+为<strong>软聚类</strong>算法</p>
+<hr />
+<h4 id="二-k-means-算法又名-c-means-算法">二、 $ k-means $ 算法（又名 $
+c-means $ 算法）</h4>
+<p>首先将图像整型为 $ n * s $ 的形式，其中 $ n $ 是像素点的总个数， $ s
+$ 是图像的通道数，对于灰度图像需要整型成 $ n * 1 $
+的形式，而对于真彩色图像（如RGB图像）则需要整型成 $ n * 3 $ 的形式</p>
+<p>在上述 $ n * s $ 的特征向量矩阵中，使用随机数生成算法选取 $ k $
+个行向量 $ k * s $ 作为初始的聚类中心矩阵</p>
+<p>计算图像上的每一个像素点所代表的特征向量与聚类中心的欧式距离，比较并将其划分给距离最小的那个聚类中心，<strong>一个像素点只允许被划分给一个聚类中心</strong></p>
+<p>划分完一轮后，取每一个聚类中所有像素点所代表的特征向量的<strong>平均值</strong>作为新的聚类中心</p>
+<p>计算相邻两次聚类中心之间欧氏距离的和（称为残差）并和阈值相比较，若小于阈值，则迭代结束，反之则重新迭代</p>
+<p>其流程展示如下：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageSegmentation/Clustering/k_means.png" style="zoom: 67%;" /></p>
+<hr />
+<h4 id="三-fuzzy-c-means-算法">三、 $ fuzzy-c-means $ 算法</h4>
+<p>搞清楚<strong>隶属度矩阵</strong>的含义，便不难理解模糊聚类算法</p>
+<p>其流程展示如下：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageSegmentation/Clustering/fuzzy_c_means.png" style="zoom: 50%;" /></p>
+<hr />
+<h4 id="四观察二者的分割结果">四、观察二者的分割结果</h4>
+<p>首先观察 $ k-means $ 算法的分割结果：</p>
+<p><img
+src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageSegmentation/Clustering/kmeans.png" /></p>
+<p>再观察 $ fuzzy-c-means $ 算法的分割结果：</p>
+<p><img
+src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageSegmentation/Clustering/cmeans.png" /></p>
+<p>可以很明显地看出，模糊聚类对于归并<strong>“突兀的异类像素”</strong>有着更好的结果，究其本质是模糊理论的<strong>容错率、纠错率</strong>更高</p>
+]]></content>
+      <categories>
+        <category>图像处理</category>
+        <category>图像分割</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+        <tag>图像分割</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图像融合概述</title>
+    <url>/2022/03/25/tu-xiang-rong-he-gai-shu/</url>
+    <content><![CDATA[<h4 id="一图像融合的层次">一、图像融合的层次</h4>
+<blockquote>
+<p>图像融合的三个层次（三种分类）是：像素级融合、特征级融合、决策级融合</p>
+</blockquote>
+<h5
+id="像素级融合研究最多应用最广的融合层次">1、像素级融合（研究最多，应用最广的融合层次）</h5>
+<p>像素级融合是<strong>最低层次</strong>的融合，它的处理对象是单个像素。</p>
+<p>常见的作法是对相应位置处的像素取最大值、最小值或平均值进行融合。</p>
+<p>它对图像配准的精度要求很高（像素级精度），是三个融合层次中难度最大的层次。</p>
+<p>可借助于下图帮助理解：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E5%83%8F%E7%B4%A0%E8%9E%8D%E5%90%88.png" style="zoom: 50%;" /></p>
+<p>其大致流程为：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E5%83%8F%E7%B4%A0%E7%BA%A7%E8%9E%8D%E5%90%88.png" style="zoom:67%;" /></p>
+<h5 id="特征级融合">2、特征级融合</h5>
+<p>特征级融合的层次<strong>介于像素级和决策级之间</strong>，其主要针对目标是图像的特征（如几何特征、谱特征、统计特征等）。</p>
+<p>特征相对于原图像信息而言往往是稀疏的，能有效地提高图像融合的计算速度。</p>
+<p>其大致流程为：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E7%89%B9%E5%BE%81%E7%BA%A7%E8%9E%8D%E5%90%88.png" style="zoom:67%;" /></p>
+<h5 id="决策级融合">3、决策级融合</h5>
+<p>决策级融合的层次是<strong>最高的</strong>，它针对决策问题的具体目标，不太关心微小细节。</p>
+<p>其思想是模拟人分析、推理和判决图像的过程，融合的是决策本身而不是像素或者特征（有点类似于<strong>投票表决</strong>）。</p>
+<p>它的优点是具有很好的灵活性，不易受噪声的干扰；缺点是预处理的代价高昂。</p>
+<p>其大致流程为：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E5%86%B3%E7%AD%96%E7%BA%A7%E8%9E%8D%E5%90%88.png" style="zoom: 80%;" /></p>
+<hr />
+<h4 id="二像素级融合的方法">二、像素级融合的方法</h4>
+<blockquote>
+<p>针对像素级的融合问题，现有的解决方法大致分为三类：</p>
+<p>空间域融合方法、变换域融合方法以及深度学习方法</p>
+</blockquote>
+<p>分类树如下图所示：</p>
+<p><img
+src="https://raw.githubusercontent.com/chubbylhao/myPics/106e2c2ad0e0b3d193ebdf928d77409a8dc00b0d/imageFusion/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E6%96%B9%E6%B3%95.svg" /></p>
+<hr />
+<h4 id="三空域简单融合实例">三、空域简单融合实例</h4>
+<p><img
+src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E7%AE%80%E5%8D%95%E8%9E%8D%E5%90%88%E5%AE%9E%E4%BE%8B.png" /></p>
+<hr />
+<h4 id="四拉普拉斯金字塔融合实例">四、拉普拉斯金字塔融合实例</h4>
+<p><img
+src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E9%87%91%E5%AD%97%E5%A1%94%E8%9E%8D%E5%90%88%E5%AE%9E%E4%BE%8B.png" /></p>
+]]></content>
+      <categories>
+        <category>图像处理</category>
+        <category>图像融合</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+        <tag>图像融合</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解读Python包结构时的一些记录</title>
+    <url>/2022/04/10/jie-du-python-bao-jie-gou-shi-de-yi-xie-ji-lu/</url>
+    <content><![CDATA[<h4 id="了解-python-包结构的一些记录">了解 <code>python</code>
+包结构的一些记录</h4>
+<p><code>_...</code> 通常用作“内部”名称，以 <code>_</code>
+开头的模块（包、 <code>.py</code>
+文件）不应该被（用户、外部使用者而非内部开发人员）直接导入（
+<code>import</code> ）使用</p>
+<p><code>python</code> 的 <code>.py</code>
+文件、模块、包和库之间的关系，注意使用 <code>__init__.py</code>
+文件声明一个 <code>python</code> 包</p>
+<p>不推荐使用 <code>from ... import *</code>
+语句，这样容易引起同名函数的混乱</p>
+<p><code>__name__</code> 是 <code>python</code>
+内置的系统变量，用于标识当前所在模块的模块名，其值为
+<code>__main__</code> ，但若引入了其它模块，则
+<code>其它模块名.__name__</code> 的值是该模块的名称，当
+<code>import 其它模块</code> 时，其它模块中的
+<code>if __name__ == "__main__"</code>
+中的内容不会被执行，具体内容链接：<a
+href="http://c.biancheng.net/view/4643.html">http://c.biancheng.net/view/4643.html</a></p>
+<p>引入<strong>含有空格</strong>或<strong>以数字开头</strong>（最好以字母和下划线开头）的模块名，应该使用
+<code>__import__("模块名")</code> ：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">__import__</span>(<span class="string">&quot;含有空格或以数字开头的模块名&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>当向文件导入某个模块时，导入的是该模块中那些名称不以下划线（单下划线
+<code>“_”</code> 或者双下划线 <code>"__"</code>
+）开头的变量、函数和类。因此，如果不想模块文件中的某个成员被引入到其它文件中使用，可以在其名称前添加下划线</p>
+<p>除此之外，还可以借助模块提供的 <code>__all__</code>
+变量，该变量的值是一个列表，存储的是当前模块中的一些成员（变量、函数和类）的名称。通过在模块文件中设置
+<code>__all__</code> 变量，当其它文件以
+<code>from 模块命 import *</code> 的形式导入该模块时，该文件中只能使用
+<code>__all__</code> 列表中指定的成员，具体内容链接：<a
+href="http://c.biancheng.net/view/2401.html">http://c.biancheng.net/view/2401.html</a></p>
+<p><code>python</code> 中下划线的 <code>5</code> 种含义：<a
+href="https://zhuanlan.zhihu.com/p/36173202">https://zhuanlan.zhihu.com/p/36173202</a></p>
+<p><code>cython</code> （文件后缀 <code>.pyx</code> ）是结合了
+<code>python</code> 和 <code>c</code>
+的语法的一种语言，被编译后其源代码将转译成 <code>c</code> 或
+<code>c++</code> 语法，并自动包装上函数调用界面生成 <code>.pyd</code>
+（或 <code>.so</code> ，因操作系统而异）后缀的二进制文档，即可当成普通的
+<code>python</code> 库来调用，此内容在 <code>wikipedia</code>
+上有详细介绍：<a
+href="https://zh.wikipedia.org/wiki/Cython">https://zh.wikipedia.org/wiki/Cython</a></p>
+<hr />
+<h4 id="常常回来翻阅一下以加深理解">常常回来翻阅一下，以加深理解</h4>
+<p><a
+href="http://c.biancheng.net/python/module_package/">C语言中文网/Python教程</a></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于相位相关的图像配准技术</title>
     <url>/2022/03/11/ji-yu-xiang-wei-xiang-guan-de-tu-xiang-pei-zhun-ji-zhu/</url>
     <content><![CDATA[<h4 id="一相位相关法的基本原理">一、相位相关法的基本原理</h4>
@@ -1600,179 +1899,6 @@ href="https://blog.csdn.net/EbowTang/article/details/51287309">EbowTang的博客
       <tags>
         <tag>图像处理</tag>
         <tag>图像配准</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>图像融合概述</title>
-    <url>/2022/03/25/tu-xiang-rong-he-gai-shu/</url>
-    <content><![CDATA[<h4 id="一图像融合的层次">一、图像融合的层次</h4>
-<blockquote>
-<p>图像融合的三个层次（三种分类）是：像素级融合、特征级融合、决策级融合</p>
-</blockquote>
-<h5
-id="像素级融合研究最多应用最广的融合层次">1、像素级融合（研究最多，应用最广的融合层次）</h5>
-<p>像素级融合是<strong>最低层次</strong>的融合，它的处理对象是单个像素。</p>
-<p>常见的作法是对相应位置处的像素取最大值、最小值或平均值进行融合。</p>
-<p>它对图像配准的精度要求很高（像素级精度），是三个融合层次中难度最大的层次。</p>
-<p>可借助于下图帮助理解：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E5%83%8F%E7%B4%A0%E8%9E%8D%E5%90%88.png" style="zoom: 50%;" /></p>
-<p>其大致流程为：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E5%83%8F%E7%B4%A0%E7%BA%A7%E8%9E%8D%E5%90%88.png" style="zoom:67%;" /></p>
-<h5 id="特征级融合">2、特征级融合</h5>
-<p>特征级融合的层次<strong>介于像素级和决策级之间</strong>，其主要针对目标是图像的特征（如几何特征、谱特征、统计特征等）。</p>
-<p>特征相对于原图像信息而言往往是稀疏的，能有效地提高图像融合的计算速度。</p>
-<p>其大致流程为：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E7%89%B9%E5%BE%81%E7%BA%A7%E8%9E%8D%E5%90%88.png" style="zoom:67%;" /></p>
-<h5 id="决策级融合">3、决策级融合</h5>
-<p>决策级融合的层次是<strong>最高的</strong>，它针对决策问题的具体目标，不太关心微小细节。</p>
-<p>其思想是模拟人分析、推理和判决图像的过程，融合的是决策本身而不是像素或者特征（有点类似于<strong>投票表决</strong>）。</p>
-<p>它的优点是具有很好的灵活性，不易受噪声的干扰；缺点是预处理的代价高昂。</p>
-<p>其大致流程为：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E5%86%B3%E7%AD%96%E7%BA%A7%E8%9E%8D%E5%90%88.png" style="zoom: 80%;" /></p>
-<hr />
-<h4 id="二像素级融合的方法">二、像素级融合的方法</h4>
-<blockquote>
-<p>针对像素级的融合问题，现有的解决方法大致分为三类：</p>
-<p>空间域融合方法、变换域融合方法以及深度学习方法</p>
-</blockquote>
-<p>分类树如下图所示：</p>
-<p><img
-src="https://raw.githubusercontent.com/chubbylhao/myPics/106e2c2ad0e0b3d193ebdf928d77409a8dc00b0d/imageFusion/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E6%96%B9%E6%B3%95.svg" /></p>
-<hr />
-<h4 id="三空域简单融合实例">三、空域简单融合实例</h4>
-<p><img
-src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E7%AE%80%E5%8D%95%E8%9E%8D%E5%90%88%E5%AE%9E%E4%BE%8B.png" /></p>
-<hr />
-<h4 id="四拉普拉斯金字塔融合实例">四、拉普拉斯金字塔融合实例</h4>
-<p><img
-src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E9%87%91%E5%AD%97%E5%A1%94%E8%9E%8D%E5%90%88%E5%AE%9E%E4%BE%8B.png" /></p>
-]]></content>
-      <categories>
-        <category>图像处理</category>
-        <category>图像融合</category>
-      </categories>
-      <tags>
-        <tag>图像处理</tag>
-        <tag>图像融合</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>图像聚类分割中经典的k-means和fuzzy c-means算法</title>
-    <url>/2022/04/01/tu-xiang-ju-lei-fen-ge-zhong-jing-dian-de-k-means-he-fuzzy-c-means-suan-fa/</url>
-    <content><![CDATA[<h4 id="一-k-means-算法和-fuzzy-c-means-算法概述">一、 $ k-means $
-算法和 $ fuzzy-c-means $ 算法概述</h4>
-<p>$ k-means $ 算法和 $ fuzzy-c-means $
-算法都是基于<strong>划分</strong>的聚类方法，该方法的核心思想是：</p>
-<p>将待分割目标分类为不同的簇，使得同一簇内的个体<strong>相似度</strong>最高、不同簇之间的个体<strong>差异度</strong>最高</p>
-<p>$ fuzzy-c-means $ 算法由 $ k-means $
-算法改进而来（二者可用<strong>统一理论</strong>描述），改变了<strong>“非此即彼”</strong>的分类观念</p>
-<p>$ k-means $ 为<strong>硬聚类</strong>算法，而$ fuzzy-c-means $
-为<strong>软聚类</strong>算法</p>
-<hr />
-<h4 id="二-k-means-算法又名-c-means-算法">二、 $ k-means $ 算法（又名 $
-c-means $ 算法）</h4>
-<p>首先将图像整型为 $ n * s $ 的形式，其中 $ n $ 是像素点的总个数， $ s
-$ 是图像的通道数，对于灰度图像需要整型成 $ n * 1 $
-的形式，而对于真彩色图像（如RGB图像）则需要整型成 $ n * 3 $ 的形式</p>
-<p>在上述 $ n * s $ 的特征向量矩阵中，使用随机数生成算法选取 $ k $
-个行向量 $ k * s $ 作为初始的聚类中心矩阵</p>
-<p>计算图像上的每一个像素点所代表的特征向量与聚类中心的欧式距离，比较并将其划分给距离最小的那个聚类中心，<strong>一个像素点只允许被划分给一个聚类中心</strong></p>
-<p>划分完一轮后，取每一个聚类中所有像素点所代表的特征向量的<strong>平均值</strong>作为新的聚类中心</p>
-<p>计算相邻两次聚类中心之间欧氏距离的和（称为残差）并和阈值相比较，若小于阈值，则迭代结束，反之则重新迭代</p>
-<p>其流程展示如下：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageSegmentation/Clustering/k_means.png" style="zoom: 67%;" /></p>
-<hr />
-<h4 id="三-fuzzy-c-means-算法">三、 $ fuzzy-c-means $ 算法</h4>
-<p>搞清楚<strong>隶属度矩阵</strong>的含义，便不难理解模糊聚类算法</p>
-<p>其流程展示如下：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageSegmentation/Clustering/fuzzy_c_means.png" style="zoom: 50%;" /></p>
-<hr />
-<h4 id="四观察二者的分割结果">四、观察二者的分割结果</h4>
-<p>首先观察 $ k-means $ 算法的分割结果：</p>
-<p><img
-src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageSegmentation/Clustering/kmeans.png" /></p>
-<p>再观察 $ fuzzy-c-means $ 算法的分割结果：</p>
-<p><img
-src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageSegmentation/Clustering/cmeans.png" /></p>
-<p>可以很明显地看出，模糊聚类对于归并<strong>“突兀的异类像素”</strong>有着更好的结果，究其本质是模糊理论的<strong>容错率、纠错率</strong>更高</p>
-]]></content>
-      <categories>
-        <category>图像处理</category>
-        <category>图像分割</category>
-      </categories>
-      <tags>
-        <tag>图像处理</tag>
-        <tag>图像分割</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解读Python包结构时的一些记录</title>
-    <url>/2022/04/10/jie-du-python-bao-jie-gou-shi-de-yi-xie-ji-lu/</url>
-    <content><![CDATA[<h4 id="了解-python-包结构的一些记录">了解 <code>python</code>
-包结构的一些记录</h4>
-<p><code>_...</code> 通常用作“内部”名称，以 <code>_</code>
-开头的模块（包、 <code>.py</code>
-文件）不应该被（用户、外部使用者而非内部开发人员）直接导入（
-<code>import</code> ）使用</p>
-<p><code>python</code> 的 <code>.py</code>
-文件、模块、包和库之间的关系，注意使用 <code>__init__.py</code>
-文件声明一个 <code>python</code> 包</p>
-<p>不推荐使用 <code>from ... import *</code>
-语句，这样容易引起同名函数的混乱</p>
-<p><code>__name__</code> 是 <code>python</code>
-内置的系统变量，用于标识当前所在模块的模块名，其值为
-<code>__main__</code> ，但若引入了其它模块，则
-<code>其它模块名.__name__</code> 的值是该模块的名称，当
-<code>import 其它模块</code> 时，其它模块中的
-<code>if __name__ == "__main__"</code>
-中的内容不会被执行，具体内容链接：<a
-href="http://c.biancheng.net/view/4643.html">http://c.biancheng.net/view/4643.html</a></p>
-<p>引入<strong>含有空格</strong>或<strong>以数字开头</strong>（最好以字母和下划线开头）的模块名，应该使用
-<code>__import__("模块名")</code> ：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">__import__</span>(<span class="string">&quot;含有空格或以数字开头的模块名&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>当向文件导入某个模块时，导入的是该模块中那些名称不以下划线（单下划线
-<code>“_”</code> 或者双下划线 <code>"__"</code>
-）开头的变量、函数和类。因此，如果不想模块文件中的某个成员被引入到其它文件中使用，可以在其名称前添加下划线</p>
-<p>除此之外，还可以借助模块提供的 <code>__all__</code>
-变量，该变量的值是一个列表，存储的是当前模块中的一些成员（变量、函数和类）的名称。通过在模块文件中设置
-<code>__all__</code> 变量，当其它文件以
-<code>from 模块命 import *</code> 的形式导入该模块时，该文件中只能使用
-<code>__all__</code> 列表中指定的成员，具体内容链接：<a
-href="http://c.biancheng.net/view/2401.html">http://c.biancheng.net/view/2401.html</a></p>
-<p><code>python</code> 中下划线的 <code>5</code> 种含义：<a
-href="https://zhuanlan.zhihu.com/p/36173202">https://zhuanlan.zhihu.com/p/36173202</a></p>
-<p><code>cython</code> （文件后缀 <code>.pyx</code> ）是结合了
-<code>python</code> 和 <code>c</code>
-的语法的一种语言，被编译后其源代码将转译成 <code>c</code> 或
-<code>c++</code> 语法，并自动包装上函数调用界面生成 <code>.pyd</code>
-（或 <code>.so</code> ，因操作系统而异）后缀的二进制文档，即可当成普通的
-<code>python</code> 库来调用，此内容在 <code>wikipedia</code>
-上有详细介绍：<a
-href="https://zh.wikipedia.org/wiki/Cython">https://zh.wikipedia.org/wiki/Cython</a></p>
-<hr />
-<h4 id="常常回来翻阅一下以加深理解">常常回来翻阅一下，以加深理解</h4>
-<p><a
-href="http://c.biancheng.net/python/module_package/">C语言中文网/Python教程</a></p>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>图像的傅里叶变换</title>
-    <url>/2022/09/10/tu-xiang-de-fu-li-xie-bian-huan/</url>
-    <content><![CDATA[
-]]></content>
-      <categories>
-        <category>图像处理</category>
-        <category>图像变换</category>
-      </categories>
-      <tags>
-        <tag>图像处理</tag>
-        <tag>图像变换</tag>
       </tags>
   </entry>
 </search>
