@@ -184,29 +184,6 @@ href="https://milania.de/blog/Introduction_to_the_Hessian_feature_detector_for_f
       </tags>
   </entry>
   <entry>
-    <title>Haar特征</title>
-    <url>/2022/04/18/haar-te-zheng/</url>
-    <content><![CDATA[<p>网上有关 <code>Haar</code>
-特征的文章很多，并且写得都很好，本人借此机会偷个懒，附上链接：</p>
-<p><a href="https://zhuanlan.zhihu.com/p/38056144">人脸 Haar
-特征快速检测及其特征计算（推荐阅读）</a></p>
-<p><a
-href="https://blog.csdn.net/xizero00/article/details/46929261">特征提取之
-Haar 特征</a></p>
-<p><a
-href="https://blog.csdn.net/zouxy09/article/details/7929570">目标检测的图像特征提取之
-Haar 特征</a></p>
-]]></content>
-      <categories>
-        <category>图像处理</category>
-        <category>特征检测</category>
-      </categories>
-      <tags>
-        <tag>图像处理</tag>
-        <tag>特征检测</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>HOG特征</title>
     <url>/2022/04/16/hog-te-zheng/</url>
     <content><![CDATA[<p>梯度方向直方图 <code>（Histogram of Oriented Gradient，HOG）</code>
@@ -335,6 +312,29 @@ href="https://blog.csdn.net/qinghuaci666/article/details/81868567">这是一篇�
 href="https://www.cnblogs.com/alexme/p/11361563.html">只能说这个是十分的详细（不过我没有细看）</a></p>
 <p><a href="https://www.cnblogs.com/Jack-Elvis/p/11285290.html">HOG
 特征</a></p>
+]]></content>
+      <categories>
+        <category>图像处理</category>
+        <category>特征检测</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+        <tag>特征检测</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Haar特征</title>
+    <url>/2022/04/18/haar-te-zheng/</url>
+    <content><![CDATA[<p>网上有关 <code>Haar</code>
+特征的文章很多，并且写得都很好，本人借此机会偷个懒，附上链接：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/38056144">人脸 Haar
+特征快速检测及其特征计算（推荐阅读）</a></p>
+<p><a
+href="https://blog.csdn.net/xizero00/article/details/46929261">特征提取之
+Haar 特征</a></p>
+<p><a
+href="https://blog.csdn.net/zouxy09/article/details/7929570">目标检测的图像特征提取之
+Haar 特征</a></p>
 ]]></content>
       <categories>
         <category>图像处理</category>
@@ -521,6 +521,34 @@ href="http://localhost:4000/2022/04/13/dip-zhong-de-hessian-ju-zhen/">DIP
       </tags>
   </entry>
   <entry>
+    <title>LBP特征</title>
+    <url>/2022/04/17/lbp-te-zheng/</url>
+    <content><![CDATA[<p>网上有关 <code>LBP</code>
+特征的文章很多，并且写得都很好，本人借此机会偷个懒，附上链接：</p>
+<p><a
+href="https://blog.csdn.net/quincuntial/article/details/50541815">LBP
+特征原理及代码实现（首推，写得超棒）</a></p>
+<p><a
+href="https://senitco.github.io/2017/06/12/image-feature-lbp/">图像特征提取之
+LBP 特征</a></p>
+<p><a
+href="https://clarkhedi.github.io/2020/09/28/ju-bu-er-zhi-mo-shi-lbp/">局部二值模式（LBP）</a></p>
+<p>下面为图像插值的相关文章：（圆形 <code>LBP</code> 要用到）</p>
+<p><a
+href="https://blog.csdn.net/huang1024rui/article/details/46545329">双线性插值（MATLAB实现）</a></p>
+<p><a href="https://anymechen.github.io/ejq1xAVT-/">图像插值算法及
+MATLAB 实现</a></p>
+]]></content>
+      <categories>
+        <category>图像处理</category>
+        <category>特征检测</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+        <tag>特征检测</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hough线变换</title>
     <url>/2022/03/09/hough-xian-bian-huan/</url>
     <content><![CDATA[<h4 id="一-hough-变换的参数平面-hough-平面">一、 $ Hough $
@@ -664,31 +692,78 @@ sin(\theta)y \\ \\
       </tags>
   </entry>
   <entry>
-    <title>LBP特征</title>
-    <url>/2022/04/17/lbp-te-zheng/</url>
-    <content><![CDATA[<p>网上有关 <code>LBP</code>
-特征的文章很多，并且写得都很好，本人借此机会偷个懒，附上链接：</p>
+    <title>Python中的生成器和迭代器</title>
+    <url>/2022/04/12/python-zhong-de-sheng-cheng-qi-he-die-dai-qi/</url>
+    <content><![CDATA[<p>好文链接：</p>
 <p><a
-href="https://blog.csdn.net/quincuntial/article/details/50541815">LBP
-特征原理及代码实现（首推，写得超棒）</a></p>
+href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017318207388128">廖雪峰的官方网站：生成器</a></p>
 <p><a
-href="https://senitco.github.io/2017/06/12/image-feature-lbp/">图像特征提取之
-LBP 特征</a></p>
+href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017323698112640">廖雪峰的官方网站：迭代器</a></p>
 <p><a
-href="https://clarkhedi.github.io/2020/09/28/ju-bu-er-zhi-mo-shi-lbp/">局部二值模式（LBP）</a></p>
-<p>下面为图像插值的相关文章：（圆形 <code>LBP</code> 要用到）</p>
+href="https://www.liujiangblog.com/course/python/38">刘江的博客教程：生成器</a></p>
 <p><a
-href="https://blog.csdn.net/huang1024rui/article/details/46545329">双线性插值（MATLAB实现）</a></p>
-<p><a href="https://anymechen.github.io/ejq1xAVT-/">图像插值算法及
-MATLAB 实现</a></p>
+href="https://www.liujiangblog.com/course/python/37">刘江的博客教程：迭代器</a></p>
+<p>个人尝试：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成器可直接通过将列表生成式的[]改为()得到</span></span><br><span class="line"><span class="comment"># 用yield关键字将一个函数标识为一个生成器</span></span><br><span class="line"><span class="comment"># 如实现斐波那契数列</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params"><span class="built_in">max</span></span>):</span><br><span class="line">    n, a, b = <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; <span class="built_in">max</span>:</span><br><span class="line">        <span class="comment"># print(b)</span></span><br><span class="line">        <span class="keyword">yield</span> b</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;done&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用next()函数调用</span></span><br><span class="line"><span class="comment"># 调用fib()并非返回原函数的返回值，而是返回一个生成器对象</span></span><br><span class="line">gene = fib(<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(gene))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gene))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gene))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gene))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gene))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gene))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gene))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 必须新创建一个生成器对象</span></span><br><span class="line"><span class="comment"># 继续使用gene会抛出StopIteration异常</span></span><br><span class="line">gene2 = fib(<span class="number">6</span>)</span><br><span class="line"><span class="comment"># 使用for循环调用</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> gene2:</span><br><span class="line">    <span class="built_in">print</span>(n)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查某种类型是否是”可迭代的“</span></span><br><span class="line"><span class="keyword">from</span> collections.abc <span class="keyword">import</span> Iterable, Iterator</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>([], Iterable))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(&#123;&#125;, Iterable))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(<span class="string">&#x27;abc&#x27;</span>, Iterable))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>((x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)), Iterable))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(<span class="number">100</span>, Iterable))</span><br><span class="line"></span><br><span class="line"><span class="comment"># ”可迭代的“和”可迭代对象“是两种完全不同的东西</span></span><br><span class="line"><span class="comment"># 列表、元组等是”可迭代的“，但却不是”可迭代对象“，它们无法被next()方法调用</span></span><br><span class="line"><span class="comment"># 使用iter()函数将”可迭代的“类型转化成为”可迭代对象“</span></span><br><span class="line"><span class="comment"># 生成器天然就是”可迭代对象“，也就是迭代器</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>([], Iterator))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(<span class="built_in">iter</span>([]), Iterator))</span><br></pre></td></tr></table></figure>
+<p>上述代码输出：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;generator&#x27;</span>&gt;</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>图像处理</category>
-        <category>特征检测</category>
+        <category>Python</category>
       </categories>
       <tags>
-        <tag>图像处理</tag>
-        <tag>特征检测</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python中的生成式（推导式）</title>
+    <url>/2022/04/12/python-zhong-de-sheng-cheng-shi-tui-dao-shi/</url>
+    <content><![CDATA[<h4 id="列表生成式">列表生成式</h4>
+<p>先看一个例子：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 测试</span></span><br><span class="line">lis = [x * x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>)]</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>]</span><br></pre></td></tr></table></figure>
+<p>上面的<strong>一行</strong>语句等效于下面的 <code>for</code>
+循环：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 以上列表生成式具有下面的逻辑：</span></span><br><span class="line"><span class="comment"># 首先执行for循环，对于每一个x，计算(x * x)的值</span></span><br><span class="line"><span class="comment"># 将这些值按序添加到一个新列表lis当中</span></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">lis = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">    lis.append(i * i)</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>]</span><br></pre></td></tr></table></figure>
+<p>再来看看一些进阶用法：</p>
+<ul>
+<li>在 <code>for</code> 后面使用 <code>if</code> 语句，表示筛选（过滤）
+<code>x</code> 的条件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 只操作x&lt;=5时的x</span></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">lis = [x * x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>) <span class="keyword">if</span> x &lt;= <span class="number">5</span>]</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 <code>for</code> 前面使用 <code>if</code>
+语句，表示改变生成新列表中值的方式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 当x&lt;=5时，计算x*x；当x&gt;5时，计算x</span></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">lis = [x * x <span class="keyword">if</span> x&lt;= <span class="number">5</span> <span class="keyword">else</span> x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>)]</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用多层 <code>for</code> 循环（和单层循环是一个意思，
+<code>3</code> 层及 <code>3</code>
+层以上的循环在生成式（推导式）中就用得比较少了）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 测试</span></span><br><span class="line">lis = [x * y <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">4</span>) <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">4</span>)]</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用多个变量来生成列表</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 测试</span></span><br><span class="line">lis = [a+b+c <span class="keyword">for</span> a <span class="keyword">in</span> <span class="string">&quot;p&quot;</span> <span class="keyword">for</span> b <span class="keyword">in</span> <span class="string">&quot;i&quot;</span> <span class="keyword">for</span> c <span class="keyword">in</span> <span class="string">&quot;g&quot;</span>]</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">[<span class="string">&#x27;pig&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<hr />
+<h4 id="字典生成式">字典生成式</h4>
+<p>个人感觉这个没有列表生成式实用，但还是了解一下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 测试</span></span><br><span class="line">dic = &#123;x : y * y <span class="keyword">for</span> x, y <span class="keyword">in</span> [(<span class="string">&quot;pig&quot;</span>, <span class="number">1</span>), (<span class="string">&quot;dog&quot;</span>, <span class="number">2</span>), (<span class="string">&quot;cat&quot;</span>, <span class="number">3</span>)]&#125;</span><br><span class="line"><span class="built_in">print</span>(dic)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">&#123;<span class="string">&#x27;pig&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;dog&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;cat&#x27;</span>: <span class="number">9</span>&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<h4 id="集合生成式">集合生成式</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 注意，集合是无序不重复的</span></span><br><span class="line"><span class="comment"># 相比于字典，没有键-值对结构</span></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">a = &#123;x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="string">&quot;abracadabra&quot;</span> <span class="keyword">if</span> x <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">&quot;abc&quot;</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">&#123;<span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;d&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<h4 id="元组生成式">元组生成式？</h4>
+<p>事实上不存在元组推导式，详情参看：<a
+href="https://www.liujiangblog.com/course/python/36">刘江的博客教程：元组生成式？</a></p>
+<p>其它参考：<a
+href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017317609699776">廖雪峰的官方网站：列表生成式</a></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -786,81 +861,6 @@ href="https://www.liujiangblog.com/course/python/31">刘江的博客教程：
 Python 教程</a></p>
 <p><a href="https://www.jianshu.com/p/c0ce45122849">Python
 动态参数的使用</a></p>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python中的生成器和迭代器</title>
-    <url>/2022/04/12/python-zhong-de-sheng-cheng-qi-he-die-dai-qi/</url>
-    <content><![CDATA[<p>好文链接：</p>
-<p><a
-href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017318207388128">廖雪峰的官方网站：生成器</a></p>
-<p><a
-href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017323698112640">廖雪峰的官方网站：迭代器</a></p>
-<p><a
-href="https://www.liujiangblog.com/course/python/38">刘江的博客教程：生成器</a></p>
-<p><a
-href="https://www.liujiangblog.com/course/python/37">刘江的博客教程：迭代器</a></p>
-<p>个人尝试：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成器可直接通过将列表生成式的[]改为()得到</span></span><br><span class="line"><span class="comment"># 用yield关键字将一个函数标识为一个生成器</span></span><br><span class="line"><span class="comment"># 如实现斐波那契数列</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params"><span class="built_in">max</span></span>):</span><br><span class="line">    n, a, b = <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; <span class="built_in">max</span>:</span><br><span class="line">        <span class="comment"># print(b)</span></span><br><span class="line">        <span class="keyword">yield</span> b</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;done&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用next()函数调用</span></span><br><span class="line"><span class="comment"># 调用fib()并非返回原函数的返回值，而是返回一个生成器对象</span></span><br><span class="line">gene = fib(<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(gene))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gene))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gene))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gene))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gene))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gene))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(gene))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 必须新创建一个生成器对象</span></span><br><span class="line"><span class="comment"># 继续使用gene会抛出StopIteration异常</span></span><br><span class="line">gene2 = fib(<span class="number">6</span>)</span><br><span class="line"><span class="comment"># 使用for循环调用</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> gene2:</span><br><span class="line">    <span class="built_in">print</span>(n)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查某种类型是否是”可迭代的“</span></span><br><span class="line"><span class="keyword">from</span> collections.abc <span class="keyword">import</span> Iterable, Iterator</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>([], Iterable))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(&#123;&#125;, Iterable))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(<span class="string">&#x27;abc&#x27;</span>, Iterable))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>((x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)), Iterable))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(<span class="number">100</span>, Iterable))</span><br><span class="line"></span><br><span class="line"><span class="comment"># ”可迭代的“和”可迭代对象“是两种完全不同的东西</span></span><br><span class="line"><span class="comment"># 列表、元组等是”可迭代的“，但却不是”可迭代对象“，它们无法被next()方法调用</span></span><br><span class="line"><span class="comment"># 使用iter()函数将”可迭代的“类型转化成为”可迭代对象“</span></span><br><span class="line"><span class="comment"># 生成器天然就是”可迭代对象“，也就是迭代器</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>([], Iterator))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">isinstance</span>(<span class="built_in">iter</span>([]), Iterator))</span><br></pre></td></tr></table></figure>
-<p>上述代码输出：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;generator&#x27;</span>&gt;</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python中的生成式（推导式）</title>
-    <url>/2022/04/12/python-zhong-de-sheng-cheng-shi-tui-dao-shi/</url>
-    <content><![CDATA[<h4 id="列表生成式">列表生成式</h4>
-<p>先看一个例子：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 测试</span></span><br><span class="line">lis = [x * x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>)]</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>]</span><br></pre></td></tr></table></figure>
-<p>上面的<strong>一行</strong>语句等效于下面的 <code>for</code>
-循环：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 以上列表生成式具有下面的逻辑：</span></span><br><span class="line"><span class="comment"># 首先执行for循环，对于每一个x，计算(x * x)的值</span></span><br><span class="line"><span class="comment"># 将这些值按序添加到一个新列表lis当中</span></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">lis = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">    lis.append(i * i)</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>]</span><br></pre></td></tr></table></figure>
-<p>再来看看一些进阶用法：</p>
-<ul>
-<li>在 <code>for</code> 后面使用 <code>if</code> 语句，表示筛选（过滤）
-<code>x</code> 的条件</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 只操作x&lt;=5时的x</span></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">lis = [x * x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>) <span class="keyword">if</span> x &lt;= <span class="number">5</span>]</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在 <code>for</code> 前面使用 <code>if</code>
-语句，表示改变生成新列表中值的方式</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 当x&lt;=5时，计算x*x；当x&gt;5时，计算x</span></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">lis = [x * x <span class="keyword">if</span> x&lt;= <span class="number">5</span> <span class="keyword">else</span> x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>)]</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用多层 <code>for</code> 循环（和单层循环是一个意思，
-<code>3</code> 层及 <code>3</code>
-层以上的循环在生成式（推导式）中就用得比较少了）</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 测试</span></span><br><span class="line">lis = [x * y <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">4</span>) <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">4</span>)]</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用多个变量来生成列表</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 测试</span></span><br><span class="line">lis = [a+b+c <span class="keyword">for</span> a <span class="keyword">in</span> <span class="string">&quot;p&quot;</span> <span class="keyword">for</span> b <span class="keyword">in</span> <span class="string">&quot;i&quot;</span> <span class="keyword">for</span> c <span class="keyword">in</span> <span class="string">&quot;g&quot;</span>]</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">[<span class="string">&#x27;pig&#x27;</span>]</span><br></pre></td></tr></table></figure>
-<hr />
-<h4 id="字典生成式">字典生成式</h4>
-<p>个人感觉这个没有列表生成式实用，但还是了解一下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 测试</span></span><br><span class="line">dic = &#123;x : y * y <span class="keyword">for</span> x, y <span class="keyword">in</span> [(<span class="string">&quot;pig&quot;</span>, <span class="number">1</span>), (<span class="string">&quot;dog&quot;</span>, <span class="number">2</span>), (<span class="string">&quot;cat&quot;</span>, <span class="number">3</span>)]&#125;</span><br><span class="line"><span class="built_in">print</span>(dic)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">&#123;<span class="string">&#x27;pig&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;dog&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;cat&#x27;</span>: <span class="number">9</span>&#125;</span><br></pre></td></tr></table></figure>
-<hr />
-<h4 id="集合生成式">集合生成式</h4>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 注意，集合是无序不重复的</span></span><br><span class="line"><span class="comment"># 相比于字典，没有键-值对结构</span></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">a = &#123;x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="string">&quot;abracadabra&quot;</span> <span class="keyword">if</span> x <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">&quot;abc&quot;</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">&#123;<span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;d&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
-<hr />
-<h4 id="元组生成式">元组生成式？</h4>
-<p>事实上不存在元组推导式，详情参看：<a
-href="https://www.liujiangblog.com/course/python/36">刘江的博客教程：元组生成式？</a></p>
-<p>其它参考：<a
-href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017317609699776">廖雪峰的官方网站：列表生成式</a></p>
 ]]></content>
       <categories>
         <category>Python</category>
@@ -1066,6 +1066,59 @@ Hexo 中文文档<strong>（也超详细</strong>）</a></p>
       <tags>
         <tag>环境搭建</tag>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>决策树</title>
+    <url>/2022/09/25/jue-ce-shu/</url>
+    <content><![CDATA[<p>决策树，顾名思义，它是一棵能对问题做出决策的树。</p>
+<p>决策树是<strong>线性模型</strong>，既可以处理<strong>分类</strong>问题，也能解决<strong>回归</strong>问题，属于<strong>有监督学习</strong>的一种。</p>
+<p>决策树的每一个非叶子结点都是对数据个体某一个特征的判断。</p>
+<p>决策树的叶子节点决定了判定的类别，对分类任务采用<strong>简单投票法</strong>，对回归任务采用<strong>简单平均法</strong>。</p>
+<p>每次决策后，希望子节点的“纯度”得到提升，即“熵“减小。</p>
+<p>因此，构造决策树的问题就聚焦于<strong>”如何选择结点的顺序？“</strong>。对于下图来说，即”色泽在前还是根蒂在前好呢？“。</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/machine%20learning/decision%20tree/1.png" style="zoom: 80%;" /></p>
+<hr />
+<h4 id="如何选择节点的顺序">如何选择节点的顺序</h4>
+<ol type="1">
+<li><strong>信息增益：</strong></li>
+</ol>
+<ul>
+<li>信息增益越高，即熵越小，意味着子节点的”纯度“提升越大</li>
+<li>信息增益对<strong>可取值数目较多的属性</strong>有所偏好</li>
+<li>ID3决策树算法以信息增益作为选择准则</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>增益率：</strong></li>
+</ol>
+<ul>
+<li>增益率对<strong>可取值数目较少的属性</strong>有所偏好</li>
+<li>它使用了启发式选择方法：先从候选结点中找出信息增益高于平均水平的属性，再从中选择增益率最高的</li>
+<li>C4.5决策树算法以信息率作为选择准则</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>基尼指数：</strong></li>
+</ol>
+<ul>
+<li>基尼指数越小，意味着子节点的”纯度“提升越大</li>
+<li>CART决策树以基尼指数作为选择准则</li>
+</ul>
+<hr />
+<h4 id="如何避免过拟合">如何避免过拟合</h4>
+<ul>
+<li>采取<strong>预剪枝</strong>和<strong>后剪枝</strong>的手段</li>
+<li>预剪枝会带来欠拟合的风险</li>
+<li>后剪枝的泛化性能往往优于预剪枝，但训练开销更大</li>
+</ul>
+<hr />
+<p>单变量决策树的划分边界平行于坐标轴。</p>
+<p>多变量决策树的划分边界可以是斜直线。</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1724,60 +1777,6 @@ src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageSegmentation/
       </tags>
   </entry>
   <entry>
-    <title>图像融合概述</title>
-    <url>/2022/03/25/tu-xiang-rong-he-gai-shu/</url>
-    <content><![CDATA[<h4 id="一图像融合的层次">一、图像融合的层次</h4>
-<blockquote>
-<p>图像融合的三个层次（三种分类）是：像素级融合、特征级融合、决策级融合</p>
-</blockquote>
-<h5
-id="像素级融合研究最多应用最广的融合层次">1、像素级融合（研究最多，应用最广的融合层次）</h5>
-<p>像素级融合是<strong>最低层次</strong>的融合，它的处理对象是单个像素。</p>
-<p>常见的作法是对相应位置处的像素取最大值、最小值或平均值进行融合。</p>
-<p>它对图像配准的精度要求很高（像素级精度），是三个融合层次中难度最大的层次。</p>
-<p>可借助于下图帮助理解：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E5%83%8F%E7%B4%A0%E8%9E%8D%E5%90%88.png" style="zoom: 50%;" /></p>
-<p>其大致流程为：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E5%83%8F%E7%B4%A0%E7%BA%A7%E8%9E%8D%E5%90%88.png" style="zoom:67%;" /></p>
-<h5 id="特征级融合">2、特征级融合</h5>
-<p>特征级融合的层次<strong>介于像素级和决策级之间</strong>，其主要针对目标是图像的特征（如几何特征、谱特征、统计特征等）。</p>
-<p>特征相对于原图像信息而言往往是稀疏的，能有效地提高图像融合的计算速度。</p>
-<p>其大致流程为：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E7%89%B9%E5%BE%81%E7%BA%A7%E8%9E%8D%E5%90%88.png" style="zoom:67%;" /></p>
-<h5 id="决策级融合">3、决策级融合</h5>
-<p>决策级融合的层次是<strong>最高的</strong>，它针对决策问题的具体目标，不太关心微小细节。</p>
-<p>其思想是模拟人分析、推理和判决图像的过程，融合的是决策本身而不是像素或者特征（有点类似于<strong>投票表决</strong>）。</p>
-<p>它的优点是具有很好的灵活性，不易受噪声的干扰；缺点是预处理的代价高昂。</p>
-<p>其大致流程为：</p>
-<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E5%86%B3%E7%AD%96%E7%BA%A7%E8%9E%8D%E5%90%88.png" style="zoom: 80%;" /></p>
-<hr />
-<h4 id="二像素级融合的方法">二、像素级融合的方法</h4>
-<blockquote>
-<p>针对像素级的融合问题，现有的解决方法大致分为三类：</p>
-<p>空间域融合方法、变换域融合方法以及深度学习方法</p>
-</blockquote>
-<p>分类树如下图所示：</p>
-<p><img
-src="https://raw.githubusercontent.com/chubbylhao/myPics/106e2c2ad0e0b3d193ebdf928d77409a8dc00b0d/imageFusion/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E6%96%B9%E6%B3%95.svg" /></p>
-<hr />
-<h4 id="三空域简单融合实例">三、空域简单融合实例</h4>
-<p><img
-src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E7%AE%80%E5%8D%95%E8%9E%8D%E5%90%88%E5%AE%9E%E4%BE%8B.png" /></p>
-<hr />
-<h4 id="四拉普拉斯金字塔融合实例">四、拉普拉斯金字塔融合实例</h4>
-<p><img
-src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E9%87%91%E5%AD%97%E5%A1%94%E8%9E%8D%E5%90%88%E5%AE%9E%E4%BE%8B.png" /></p>
-]]></content>
-      <categories>
-        <category>图像处理</category>
-        <category>图像融合</category>
-      </categories>
-      <tags>
-        <tag>图像处理</tag>
-        <tag>图像融合</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>解读Python包结构时的一些记录</title>
     <url>/2022/04/10/jie-du-python-bao-jie-gou-shi-de-yi-xie-ji-lu/</url>
     <content><![CDATA[<h4 id="了解-python-包结构的一些记录">了解 <code>python</code>
@@ -1899,6 +1898,60 @@ href="https://blog.csdn.net/EbowTang/article/details/51287309">EbowTang的博客
       <tags>
         <tag>图像处理</tag>
         <tag>图像配准</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图像融合概述</title>
+    <url>/2022/03/25/tu-xiang-rong-he-gai-shu/</url>
+    <content><![CDATA[<h4 id="一图像融合的层次">一、图像融合的层次</h4>
+<blockquote>
+<p>图像融合的三个层次（三种分类）是：像素级融合、特征级融合、决策级融合</p>
+</blockquote>
+<h5
+id="像素级融合研究最多应用最广的融合层次">1、像素级融合（研究最多，应用最广的融合层次）</h5>
+<p>像素级融合是<strong>最低层次</strong>的融合，它的处理对象是单个像素。</p>
+<p>常见的作法是对相应位置处的像素取最大值、最小值或平均值进行融合。</p>
+<p>它对图像配准的精度要求很高（像素级精度），是三个融合层次中难度最大的层次。</p>
+<p>可借助于下图帮助理解：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E5%83%8F%E7%B4%A0%E8%9E%8D%E5%90%88.png" style="zoom: 50%;" /></p>
+<p>其大致流程为：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E5%83%8F%E7%B4%A0%E7%BA%A7%E8%9E%8D%E5%90%88.png" style="zoom:67%;" /></p>
+<h5 id="特征级融合">2、特征级融合</h5>
+<p>特征级融合的层次<strong>介于像素级和决策级之间</strong>，其主要针对目标是图像的特征（如几何特征、谱特征、统计特征等）。</p>
+<p>特征相对于原图像信息而言往往是稀疏的，能有效地提高图像融合的计算速度。</p>
+<p>其大致流程为：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E7%89%B9%E5%BE%81%E7%BA%A7%E8%9E%8D%E5%90%88.png" style="zoom:67%;" /></p>
+<h5 id="决策级融合">3、决策级融合</h5>
+<p>决策级融合的层次是<strong>最高的</strong>，它针对决策问题的具体目标，不太关心微小细节。</p>
+<p>其思想是模拟人分析、推理和判决图像的过程，融合的是决策本身而不是像素或者特征（有点类似于<strong>投票表决</strong>）。</p>
+<p>它的优点是具有很好的灵活性，不易受噪声的干扰；缺点是预处理的代价高昂。</p>
+<p>其大致流程为：</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E5%86%B3%E7%AD%96%E7%BA%A7%E8%9E%8D%E5%90%88.png" style="zoom: 80%;" /></p>
+<hr />
+<h4 id="二像素级融合的方法">二、像素级融合的方法</h4>
+<blockquote>
+<p>针对像素级的融合问题，现有的解决方法大致分为三类：</p>
+<p>空间域融合方法、变换域融合方法以及深度学习方法</p>
+</blockquote>
+<p>分类树如下图所示：</p>
+<p><img
+src="https://raw.githubusercontent.com/chubbylhao/myPics/106e2c2ad0e0b3d193ebdf928d77409a8dc00b0d/imageFusion/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E6%96%B9%E6%B3%95.svg" /></p>
+<hr />
+<h4 id="三空域简单融合实例">三、空域简单融合实例</h4>
+<p><img
+src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E7%AE%80%E5%8D%95%E8%9E%8D%E5%90%88%E5%AE%9E%E4%BE%8B.png" /></p>
+<hr />
+<h4 id="四拉普拉斯金字塔融合实例">四、拉普拉斯金字塔融合实例</h4>
+<p><img
+src="https://raw.githubusercontent.com/chubbylhao/myPics/main/imageFusion/%E9%87%91%E5%AD%97%E5%A1%94%E8%9E%8D%E5%90%88%E5%AE%9E%E4%BE%8B.png" /></p>
+]]></content>
+      <categories>
+        <category>图像处理</category>
+        <category>图像融合</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+        <tag>图像融合</tag>
       </tags>
   </entry>
 </search>

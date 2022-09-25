@@ -20,17 +20,22 @@
     var CONFIG = {"hostname":"chubbylhao.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":220,"display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="建立本博客网站的初衷便是希望它能够帮助我记录一点知识与技术~~希望自己可以一直进步~~">
-<meta property="og:type" content="website">
-<meta property="og:title" content="lh&#39;s Blogs">
-<meta property="og:url" content="https://chubbylhao.github.io/tags/Hexo/index.html">
+  <meta name="description" content="本非科班人士对于决策树的粗浅了解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="决策树">
+<meta property="og:url" content="https://chubbylhao.github.io/2022/09/25/jue-ce-shu/index.html">
 <meta property="og:site_name" content="lh&#39;s Blogs">
-<meta property="og:description" content="建立本博客网站的初衷便是希望它能够帮助我记录一点知识与技术~~希望自己可以一直进步~~">
+<meta property="og:description" content="本非科班人士对于决策树的粗浅了解。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/chubbylhao/myPics/main/machine%20learning/decision%20tree/1.png">
+<meta property="article:published_time" content="2022-09-25T07:04:38.000Z">
+<meta property="article:modified_time" content="2022-09-25T07:52:57.651Z">
 <meta property="article:author" content="ChubbyLH">
+<meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chubbylhao/myPics/main/machine%20learning/decision%20tree/1.png">
 
-<link rel="canonical" href="https://chubbylhao.github.io/tags/Hexo/">
+<link rel="canonical" href="https://chubbylhao.github.io/2022/09/25/jue-ce-shu/">
 
 
 <script id="page-configurations">
@@ -38,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: Hexo | lh's Blogs</title>
+  <title>决策树 | lh's Blogs</title>
   
 
 
@@ -188,51 +193,162 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Hexo
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://chubbylhao.github.io/2022/09/25/jue-ce-shu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ChubbyLH">
+      <meta itemprop="description" content="建立本博客网站的初衷便是希望它能够帮助我记录一点知识与技术~~希望自己可以一直进步~~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lh's Blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          决策树
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-09-25 15:04:38 / 修改时间：15:52:57" itemprop="dateCreated datePublished" datetime="2022-09-25T15:04:38+08:00">2022-09-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>515</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+            <div class="post-description">本非科班人士对于决策树的粗浅了解。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+        <p>决策树，顾名思义，它是一棵能对问题做出决策的树。</p>
+<p>决策树是<strong>线性模型</strong>，既可以处理<strong>分类</strong>问题，也能解决<strong>回归</strong>问题，属于<strong>有监督学习</strong>的一种。</p>
+<p>决策树的每一个非叶子结点都是对数据个体某一个特征的判断。</p>
+<p>决策树的叶子节点决定了判定的类别，对分类任务采用<strong>简单投票法</strong>，对回归任务采用<strong>简单平均法</strong>。</p>
+<p>每次决策后，希望子节点的“纯度”得到提升，即“熵“减小。</p>
+<p>因此，构造决策树的问题就聚焦于<strong>”如何选择结点的顺序？“</strong>。对于下图来说，即”色泽在前还是根蒂在前好呢？“。</p>
+<p><img src="https://raw.githubusercontent.com/chubbylhao/myPics/main/machine%20learning/decision%20tree/1.png" style="zoom: 80%;" /></p>
+<hr />
+<h4 id="如何选择节点的顺序">如何选择节点的顺序</h4>
+<ol type="1">
+<li><strong>信息增益：</strong></li>
+</ol>
+<ul>
+<li>信息增益越高，即熵越小，意味着子节点的”纯度“提升越大</li>
+<li>信息增益对<strong>可取值数目较多的属性</strong>有所偏好</li>
+<li>ID3决策树算法以信息增益作为选择准则</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>增益率：</strong></li>
+</ol>
+<ul>
+<li>增益率对<strong>可取值数目较少的属性</strong>有所偏好</li>
+<li>它使用了启发式选择方法：先从候选结点中找出信息增益高于平均水平的属性，再从中选择增益率最高的</li>
+<li>C4.5决策树算法以信息率作为选择准则</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>基尼指数：</strong></li>
+</ol>
+<ul>
+<li>基尼指数越小，意味着子节点的”纯度“提升越大</li>
+<li>CART决策树以基尼指数作为选择准则</li>
+</ul>
+<hr />
+<h4 id="如何避免过拟合">如何避免过拟合</h4>
+<ul>
+<li>采取<strong>预剪枝</strong>和<strong>后剪枝</strong>的手段</li>
+<li>预剪枝会带来欠拟合的风险</li>
+<li>后剪枝的泛化性能往往优于预剪枝，但训练开销更大</li>
+</ul>
+<hr />
+<p>单变量决策树的划分边界平行于坐标轴。</p>
+<p>多变量决策树的划分边界可以是斜直线。</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+        
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-03-05T13:28:58+08:00"
-              content="2022-03-05">
-          03-05
-        </time>
-      </div>
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ChubbyLH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://chubbylhao.github.io/2022/09/25/jue-ce-shu/" title="决策树">https://chubbylhao.github.io/2022/09/25/jue-ce-shu/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/03/05/shi-yong-hexo-he-github-pages-da-jian-ge-ren-bo-ke/" itemprop="url">
-            <span itemprop="name">使用Hexo和GitHub_Pages搭建个人博客</span>
-          </a>
-      </div>
 
-    </header>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/09/10/tu-xiang-de-fu-li-xie-bian-huan/" rel="prev" title="图像的傅里叶变换">
+      <i class="fa fa-chevron-left"></i> 图像的傅里叶变换
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -285,6 +401,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E8%8A%82%E7%82%B9%E7%9A%84%E9%A1%BA%E5%BA%8F"><span class="nav-text">如何选择节点的顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E8%BF%87%E6%8B%9F%E5%90%88"><span class="nav-text">如何避免过拟合</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -490,6 +607,67 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
+    window.MathJax = {
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
